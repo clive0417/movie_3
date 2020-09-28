@@ -107,6 +107,34 @@
                                 </form>
                             </div>
                         </li>
+                        {{-- li 為商品管理 --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle　movie" href="#" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
+                                商品管理頁面<span class="caret"></span>
+                            </a>
+                            {{-- div商品管理"--}}
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/movies" >
+                                    商品管理總表
+                                </a>
+
+
+                                <a class="dropdown-item" href="/movie/create" >
+                                    新增商品
+                                </a>
+
+
+
+                            </div>
+
+
+
+
+
+
+                        </li>
+
                         @endguest
                     </ul>
                 </div>
@@ -114,6 +142,7 @@
         </nav>
 
         <main class="py-4">
+            @yield('page_title')
             @yield('content')
         </main>
     </div>

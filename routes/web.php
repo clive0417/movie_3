@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('movies','MovieController');
+    //動詞	  路徑	             行為	     路由名稱                                  
+   //GET	 /movies   	          index	    movie  [總表]                              //D                      
+    //GET	 /movies/create 	  create   	movie.create [Create 頁面]                 //D 
+    //POST   /movies              store   	movie.store [存資料 / create DB 互動]
+    //GET	 /movies/{id}         show	    movie.show [顯示單一產品頁面-->本次不需要]
+    //GET	 /movies/{id}/edit	  edit	    movie.edit [edit 頁面]
+    //PUT	 /movies/{id}	      update	movie.update [更新產品功能頁面]
+    //DELETE /movies/{id}         destroy	movie.destroy [刪除]                       //D 
+
+

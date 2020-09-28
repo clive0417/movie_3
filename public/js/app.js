@@ -49740,6 +49740,31 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+deleteMovie = function deleteMovie(id) {
+  var result = confirm('Do you want to delete Movie?'); //console.log(result); 驗證result 帶入0,1 OK
+
+  if (result) {
+    var actionUrl = '/movies/' + id; //組合網址
+    //console.log(actionurl);位置驗證OK
+    //console.log(actionUrl);
+
+    $.post(actionUrl, {
+      _method: 'delete'
+    }).done(function () {
+      console.log('test');
+      location.href = '/movies'; //重新整理頁面 
+    });
+  }
+
+  ;
+};
+
 var app = new Vue({
   el: '#app'
 });

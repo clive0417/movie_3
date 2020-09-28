@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
+ 
 require('./bootstrap'); 
 
 window.Vue = require('vue');
@@ -26,6 +28,31 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+$.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+deleteMovie = function (id) {
+    let result = confirm('Do you want to delete Movie?');
+    //console.log(result); 驗證result 帶入0,1 OK
+    
+    if (result) {
+        let actionUrl ='/movies/'+id;//組合網址
+        //console.log(actionurl);位置驗證OK
+        //console.log(actionUrl);
+        
+        $.post(actionUrl,{_method:'delete'}).done(function() {
+            console.log('test');
+            location.href = '/movies';//重新整理頁面 
+
+        });
+
+    };
+
+    
+};
 
 const app = new Vue({
     el: '#app',
