@@ -13,11 +13,12 @@ class CreateMovieTable extends Migration
      */
     public function up()
     {
-        Schema::create('movie', function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps(); 
             $table->string('title');
             $table->Integer('TMDB_id');
+            $table->Integer('price');
             $table->longText('posterUrl');
             $table->date('releaseDate');
             $table->float('point');
@@ -31,6 +32,6 @@ class CreateMovieTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movie');
+        Schema::dropIfExists('movies');
     }
 }
