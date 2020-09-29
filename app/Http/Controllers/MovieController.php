@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
+use App\Genre;
+use App\Language;
+
 use Illuminate\Http\Request;
 use Tmdb\Laravel\Facades\Tmdb; // optional for Laravel ≥5.5
 use Illuminate\Support\Facades\Log;
@@ -27,12 +30,12 @@ class MovieController extends Controller
      */
     public function create()
     {
-        
+
         $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
         $isCreate = request()->is('*create');
 
 
-        return view('movies.create',['movie'=> $movie],['isCreate'=> $isCreate]);
+        return view('movies.create', ['movie' => $movie, 'isCreate' => $isCreate]);
     }
 
     /**
@@ -43,44 +46,65 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+
         $movie = new Movie;
-        $movie ->fill($request->all());
-        $movieApiInfo=Tmdb::getMoviesApi()->getMovie($movie['TMDB_id']);
-        $movie['posterUrl'] = "https://image.tmdb.org/t/p/w500/".$movieApiInfo['poster_path'];
-        $movie['releaseDate'] =$movieApiInfo['release_date'];
-        $movie['point']=$movieApiInfo['vote_average'];
+        $movie->fill($request->all());
+        $movieApiInfo = Tmdb::getMoviesApi()->getMovie($movie['TMDB_id']);
+        $movie['posterUrl'] = "https://image.tmdb.org/t/p/w500/" . $movieApiInfo['poster_path'];
+        $movie['releaseDate'] = $movieApiInfo['release_date'];
+        $movie['point'] = $movieApiInfo['vote_average'];
+        $movie['overview'] = $movieApiInfo['overview'];
 
-        Log::info($movie['price']);
+        //Log::info($movieApiInfo);
         $movie->save();
+
+
+        //處理genre資料填入 start
+        //
+        $genreDataArray = [];
+        $genreApiArray = $movieApiInfo['genres'];
+        // 將API 資料轉成單純的已key 為0,1,2,.... 的Array 
+        foreach ($genreApiArray as $key => $genrename) {
+            array_push($genreDataArray, $genrename['name']);
+        }
+
+
+        //用for each firstOrcreate [帶入圍單純數字為key的array]
+        foreach ($genreDataArray as $key => $genre) {
+            $model = Genre::firstOrCreate(['name' => $genre]);
+            $movie->genres()->attach($model->id);
+        }
+
+        //處理genre資料填入 end
+        //處理language 資料填入 start 
+        $languageDataArray = [];
+        $languageApiArray = $movieApiInfo['spoken_languages'];
+        foreach ($languageApiArray as $key => $languagename) {
+            array_push($languageDataArray, $languagename['name']);
+        }
+        //用for each firstOrcreate [帶入圍單純數字為key的array]
+        foreach ($languageDataArray as $key => $language) {
+            $model = Language::firstOrCreate(['name' => $language]);
+            $movie->languages()->attach($model->id);
+        }
+
+
+        //處理language 資料填入 end 
+
+
         return redirect('/movies');
-        
-                //Log::info();
-        // 電影海報 --> $testmovi['poster_path']--> 只是前面要加甚麼url [https://image.tmdb.org/t/p/w500/]
-        //https://image.tmdb.org/t/p/w500/[API -feedback]
-        //  第二個為篩選條件嗎?? $movie = $client->getMoviesApi()->getMovie(550, array('language' => 'en'));
-        // 按照電影的ID[請在TMDB 裡面先查]單獨一部電影 $testmovie=Tmdb::getMoviesApi()->getmovie(500);
-        // 電影背景 --> $testmovi[''results][i {第i個資料}]['backdrop_path']　
-        //　要用的資料
-        //  //Log::info("電影海報url"."https://image.tmdb.org/t/p/w500".$testmovie['poster_path']);// 需加 "" 
-        //  Log::info("電影年分".$testmovie['release_date']);// 需加 ""
-        //  Log::info("電影分數".$testmovie['vote_average']);
-        //  Log::info("電影種類-array");
-        //  Log::info($testmovie['genres']);
-        //  Log::info("電影語言-array");
-        //  Log::info($testmovie['spoken_languages']);
-
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $movie)
     {
-        //
+        $isCreate = request()->is('*create');
+        return view('movies.show', ['movie' => $movie, 'isCreate' => $isCreate]);
     }
 
 
