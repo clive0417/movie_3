@@ -22,6 +22,7 @@ class CreateMovieTable extends Migration
             $table->longText('posterUrl');
             $table->date('releaseDate');
             $table->float('point');
+            $table->longText('overview');
         });
     }
 
