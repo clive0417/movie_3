@@ -115,12 +115,12 @@
                             </a>
                             {{-- div商品管理"--}}
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/movies" >
+                                <a class="dropdown-item" href="{{ action('MovieController@index') }}">
                                     商品管理總表
                                 </a>
 
 
-                                <a class="dropdown-item" href="/movie/create" >
+                                <a class="dropdown-item " href="{{ action('MovieController@create') }}" >
                                     新增商品
                                 </a>
 

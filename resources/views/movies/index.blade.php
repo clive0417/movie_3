@@ -8,7 +8,7 @@
                     <div class="col-md-12">
                         <h4 class="text-uppercase">Movie Admin table</h4>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a>
+                            <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">Home</a>
                             </li>
 
                             <li class="breadcrumb-item active">Movie Admin table</li>

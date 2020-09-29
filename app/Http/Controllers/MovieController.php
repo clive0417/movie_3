@@ -29,7 +29,10 @@ class MovieController extends Controller
     {
         
         $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
-        return view('movies.create',['movie'=> $movie]);
+        $isCreate = request()->is('*create');
+
+
+        return view('movies.create',['movie'=> $movie],['isCreate'=> $isCreate]);
     }
 
     /**
