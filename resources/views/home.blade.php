@@ -8,7 +8,7 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        年份
+                        年份 [暫時先以假資料]
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <button class="dropdown-item" type="button">2020</button>
@@ -20,12 +20,12 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        種類
+                        種類[genres]
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button">科幻</button>
-                        <button class="dropdown-item" type="button">喜劇</button>
-                        <button class="dropdown-item" type="button">動畫</button>
+                        @foreach ($genres as $key=> $genre)
+                        <a href="{{action('HomeController@indexWithGenre',$genre->id)}}" class="dropdown-item" type="button">{{$genre->name}}</a>
+                        @endforeach
                     </div>
                 </div>
 
@@ -34,15 +34,21 @@
 
                 <div class="card-body">
                     {{-- 以下顯示各個電影 --}}
+                    @foreach ($movies as $movie)
                     <div class="card" style="width: 10rem;">
-                        <img class="card-img-top" src="/fake_data/lion King picture.jpg" alt="Card image cap">
+
+                        <img class="card-img-top" src="{{$movie->posterUrl}}" alt="Card image cap">
+
                         <div class="card-body">
-                            <h5 class="card-title">{{ \Illuminate\Support\Str::limit("獅子王 (2019) (DVD)", 10, '...') }}</h5>
-                            <p>價格 NTD: 500 </p>
+                            <h5 class="card-title">{{$movie->title}}</h5>
+                            <p>價格 NTD: {{$movie->price}} </p>
                             <a href="#" class="btn btn-primary">View detail</a>
                             <button class="btn btn-success">直接購買</button>
-                        </div>
+                        </div>                           
+                        
+
                     </div>
+                    @endforeach
 
 
 
