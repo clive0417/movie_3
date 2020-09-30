@@ -103,8 +103,8 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        $isCreate = request()->is('*create');
-        return view('movies.show', ['movie' => $movie, 'isCreate' => $isCreate]);
+        // $isCreate = request()->is('*create');
+        // return view('movies.show', ['movie' => $movie, 'isCreate' => $isCreate ]);
     }
 
 
@@ -116,7 +116,46 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        //
+
+        $genres = $movie->genres;
+        $genresString = null ;
+        
+        // 將讀取出來的genres 轉換成 String
+        for ($i=0; $i <count($genres); $i++) {
+            //Log::info($genres[$i]['name'] );
+            $genresString=$genresString.$genres[$i]['name'];
+            $genresString=$genresString. ",";
+            
+        }
+        //end
+
+        //Log::info($genresString);
+        // 將讀取出來的genresString 轉換成 以數字的array 
+        $genresArray = explode(',',$genresString);
+        $genresArray = array_filter($genresArray);// 去除空白item
+
+        //Log::info($genresArray);
+        // end
+
+        // 將讀取出來的languages  轉換成 String
+        $languages =$movie->languages;
+        $languagesString = null ;
+        for ($i=0; $i <count($languages); $i++) {
+            //Log::info($genres[$i]['name'] );
+            $languagesString = $languagesString.$languages[$i]['name'];
+            $languagesString = $languagesString. ",";
+            
+        }
+        // 將讀取出來的genresString 轉換成 以數字的array 
+        $languagesArray = explode(',',$languagesString);
+        $languagesArray = array_filter($languagesArray);// 去除空白item
+        
+        // end
+
+
+
+        $isCreate = request()->is('*create');
+        return view('movies.edit', ['movie' => $movie, 'isCreate' => $isCreate ,'genresString' =>$genresString, 'languagesString' => $languagesString]);
     }
 
     /**
@@ -128,7 +167,35 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        // 電影table 填入資料
+        $movie->fill($request->all());
+        $movie->save();
+
+        // 處理genres 重新寫入DB
+        $movie->genres()->detach();
+        $genresArray = explode(',',$request['genresString']);
+        $genresArray = array_filter($genresArray);
+        Log::info($genresArray);
+        foreach ($genresArray as $key=>$genre) {
+            $model = Genre::firstOrCreate(['name'=> $genre]);
+            $movie->genres()->attach($model->id);
+        }
+        // 處理genres end
+
+        // 處理languages 重新寫入DB
+        $movie->languages()->detach();
+        $languagesArray = explode(',',$request['languagesString']);
+        $languagesArray = array_filter($languagesArray);
+        Log::info($languagesArray);
+        foreach ($languagesArray as $key=>$language) {
+            $model = Language::firstOrCreate(['name'=> $language]);
+            $movie->languages()->attach($model->id);
+        }
+        // 處理languages end
+        
+        
+
+        return redirect('/movies'); 
     }
 
     /**

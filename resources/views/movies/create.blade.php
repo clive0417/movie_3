@@ -24,7 +24,7 @@
 <div class="page-content">
     <div class="container">
         {{-- 是因為update 時要傳舊資料 --}}
-    @include('movies.movieform',['movie'=>$movie],['isCreate'=> $isCreate])
+    @include('movies.movie_create_form',['movie'=>$movie],['isCreate'=> $isCreate])
 
     </div>
 </div>

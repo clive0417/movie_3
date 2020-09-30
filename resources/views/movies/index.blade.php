@@ -40,7 +40,6 @@
 
 
                         <span class="float-right">
-                            <a href="{{ action('MovieController@show',$movie->id) }}"class="btn btn-primary">View</a>
                             <a href="{{ action('MovieController@edit',$movie->id) }}" class="btn btn-primary">Edit</a>
                             <button class="btn btn-danger" onclick="deleteMovie({{$movie->id}})">Delete</button>
                         </span>

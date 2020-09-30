@@ -25,17 +25,7 @@
         <input name="TMDB_id" class="form-control" value="{{$movie->TMDB_id}}">
         <label>價格</label>
         <input name="price" class="form-control" value="{{$movie->price}}">
-        <label>上映日期</label>
-        <input name="releaseDate" class="form-control" value="{{$movie->releaseDate}}">
 
-        <label>Overview</label>
-        <textarea name="overview" class="form-control" rows="4" cols="50">
-        {{$movie->overview}}
-        </textarea>
-        <br>
-        <label>電影海報</label>
-        <br>
-        <img src="{{$movie->posterUrl}}" alt="電影海報空缺">
 
 
 
