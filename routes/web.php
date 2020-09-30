@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//網址位置, 對應Controller
+Route::get('/home/genre/{genre}', 'HomeController@indexWithGenre')->name('home');
+
 Route::resource('movies','MovieController');
     //動詞	  路徑	             行為	     路由名稱                                  
    //GET	 /movies   	          index	    movie  [總表]                              //D                      
