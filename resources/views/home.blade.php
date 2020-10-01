@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                    <button class="btn btn-secondary dropdown-toggle test" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         年份 [暫時先以假資料]
                     </button>
@@ -32,17 +32,17 @@
                 <div class="card-header">商品列表</div>
 
 
-                <div class="card-body">
+                <div class="movie_area">
                     {{-- 以下顯示各個電影 --}}
                     @foreach ($movies as $movie)
-                    <div class="card" style="width: 10rem;">
+                    <div class="card single_movie_card" style="width: 10rem;">
 
                         <img class="card-img-top" src="{{$movie->posterUrl}}" alt="Card image cap">
 
                         <div class="card-body">
                             <h5 class="card-title">{{$movie->title}}</h5>
                             <p>價格 NTD: {{$movie->price}} </p>
-                            <a href="#" class="btn btn-primary">View detail</a>
+                            <a href="{{action('HomeController@show',$movie->id)}}" class="btn btn-primary">View detail</a>
                             <button class="btn btn-success">直接購買</button>
                         </div>                           
                         
@@ -54,7 +54,7 @@
 
 
                 </div>
-            </div>
+
         </div>
     </div>
 </div>

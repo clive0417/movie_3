@@ -10903,3 +10903,7 @@ a.text-dark:focus {
   display: inline;
 }
 
+.movie_area {
+  display: flex;
+}
+
