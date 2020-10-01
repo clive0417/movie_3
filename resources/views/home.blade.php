@@ -43,7 +43,6 @@
                             <h5 class="card-title">{{$movie->title}}</h5>
                             <p>價格 NTD: {{$movie->price}} </p>
                             <a href="{{action('HomeController@show',$movie->id)}}" class="btn btn-primary">View detail</a>
-                            <button class="btn btn-success">直接購買</button>
                         </div>                           
                         
 

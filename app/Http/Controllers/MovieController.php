@@ -129,13 +129,9 @@ class MovieController extends Controller
         }
         //end
 
-        //Log::info($genresString);
-        // 將讀取出來的genresString 轉換成 以數字的array 
-        $genresArray = explode(',',$genresString);
-        $genresArray = array_filter($genresArray);// 去除空白item
 
-        //Log::info($genresArray);
-        // end
+
+
 
         // 將讀取出來的languages  轉換成 String
         $languages =$movie->languages;
@@ -147,8 +143,7 @@ class MovieController extends Controller
             
         }
         // 將讀取出來的genresString 轉換成 以數字的array 
-        $languagesArray = explode(',',$languagesString);
-        $languagesArray = array_filter($languagesArray);// 去除空白item
+
         
         // end
 
@@ -175,7 +170,7 @@ class MovieController extends Controller
         $movie->genres()->detach();
         $genresArray = explode(',',$request['genresString']);
         $genresArray = array_filter($genresArray);
-        Log::info($genresArray);
+        //Log::info($genresArray);
         foreach ($genresArray as $key=>$genre) {
             $model = Genre::firstOrCreate(['name'=> $genre]);
             $movie->genres()->attach($model->id);
@@ -186,7 +181,7 @@ class MovieController extends Controller
         $movie->languages()->detach();
         $languagesArray = explode(',',$request['languagesString']);
         $languagesArray = array_filter($languagesArray);
-        Log::info($languagesArray);
+       // Log::info($languagesArray);
         foreach ($languagesArray as $key=>$language) {
             $model = Language::firstOrCreate(['name'=> $language]);
             $movie->languages()->attach($model->id);

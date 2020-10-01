@@ -60,7 +60,7 @@
 
                     @endfor
                 </select>
-                <button type="submit" class="btn btn-primary">購買</button>
+                <button type="submit" class="btn btn-primary">加入購物車</button>
                 <button type="button" class="btn btn-default" onclick="window.history.back()">cancel</button>
 
             </form>
