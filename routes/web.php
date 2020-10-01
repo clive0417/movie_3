@@ -19,10 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//網址位置, 對應Controller
+//[Route::method 網址位置, 對應Controller] 
+// genre 的篩選功能 
 Route::get('/home/genre/{genre}', 'HomeController@indexWithGenre')->name('home');
 
+Route::get('/home/{movie}', 'HomeController@show')->name('home');
+
 Route::resource('movies','MovieController');
+
     //動詞	  路徑	             行為	     路由名稱                                  
    //GET	 /movies   	          index	    movie  [總表]                              //D                      
     //GET	 /movies/create 	  create   	movie.create [Create 頁面]                 //D 
