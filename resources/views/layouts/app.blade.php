@@ -66,21 +66,17 @@
                             </a>
                             {{-- div購物車清單"--}}
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#購物車清單" onclick="event.preventDefault();
-                                                     document.getElementById('shopcar-form').submit();">
+                                <a class="dropdown-item" href="{{action('ShoppingitemController@index')}}" >
                                     購物車清單
                                 </a>
 
-                                <form id="shopcar-form" action="#購物車清單" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
                                 {{-- a結帳"--}}
                                 <a class="dropdown-item" href="#結帳" onclick="event.preventDefault();
                                 document.getElementById('checkout').submit();">
                                     結帳
                                 </a>
 
-                                <form id="checkout" action="#購物車清單" method="POST" style="display: none;">
+                                <form id="checkout" action="#購物車清單" method="GET" style="display: none;">
                                     @csrf
                                 </form>
                             </div>
@@ -108,6 +104,7 @@
                             </div>
                         </li>
                         {{-- li 為商品管理 --}}
+                        @if(Auth::user()->id ===1 )
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle　movie" href="#" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false" v-pre>
@@ -134,6 +131,7 @@
 
 
                         </li>
+                        @endif
 
                         @endguest
                     </ul>
