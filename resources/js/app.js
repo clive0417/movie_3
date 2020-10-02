@@ -35,7 +35,7 @@ $.ajaxSetup({
 });
 
 deleteMovie = function (id) {
-    let result = confirm('Do you want to delete Movie?');
+    let result = confirm('Do you want to delete movie?');
     //console.log(result); 驗證result 帶入0,1 OK
     
     if (result) {
@@ -46,6 +46,25 @@ deleteMovie = function (id) {
         $.post(actionUrl,{_method:'delete'}).done(function() {
             console.log('test');
             location.href = '/movies';//重新整理頁面 
+
+        });
+
+    };
+
+    
+};
+
+deleteShoppingitem = function (id) {
+    let result = confirm('Do you want to delete this item?');
+    //console.log(result); 驗證result 帶入0,1 OK
+    
+    if (result) {
+        let actionUrl ='/shoppingitems/'+id;//組合網址
+        //console.log(actionurl);位置驗證OK
+        //console.log(actionUrl);
+        
+        $.post(actionUrl,{_method:'delete'}).done(function() {
+            location.href = '/shoppingitems';//重新整理頁面 
 
         });
 

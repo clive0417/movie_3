@@ -49747,7 +49747,7 @@ $.ajaxSetup({
 });
 
 deleteMovie = function deleteMovie(id) {
-  var result = confirm('Do you want to delete Movie?'); //console.log(result); 驗證result 帶入0,1 OK
+  var result = confirm('Do you want to delete movie?'); //console.log(result); 驗證result 帶入0,1 OK
 
   if (result) {
     var actionUrl = '/movies/' + id; //組合網址
@@ -49759,6 +49759,24 @@ deleteMovie = function deleteMovie(id) {
     }).done(function () {
       console.log('test');
       location.href = '/movies'; //重新整理頁面 
+    });
+  }
+
+  ;
+};
+
+deleteShoppingitem = function deleteShoppingitem(id) {
+  var result = confirm('Do you want to delete this item?'); //console.log(result); 驗證result 帶入0,1 OK
+
+  if (result) {
+    var actionUrl = '/shoppingitems/' + id; //組合網址
+    //console.log(actionurl);位置驗證OK
+    //console.log(actionUrl);
+
+    $.post(actionUrl, {
+      _method: 'delete'
+    }).done(function () {
+      location.href = '/shoppingitems'; //重新整理頁面 
     });
   }
 
