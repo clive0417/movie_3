@@ -47,16 +47,18 @@
 
         </div>
         <div class="form-group">
-            <form action="">
+            <form method="post" action="/shoppingitems">
                 @csrf
+                <input type="hidden" name="user_id" class="form-control" value="{{$user_id}}">
                 <input type="hidden" name="movie_id" class="form-control" value="{{$movie->id}}">
+                <input type="hidden" name="price" class="form-control" value="{{$movie->price}}">
 
 
                 <label>購買數量</label>
                 <select name="count" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                     <option selected>Choose...</option>
                     @for ($i = 1; $i < 10; $i++) 
-                        <option value="{{$i}}">{{$i}}</option>
+                        <option name="count" value="{{$i}}">{{$i}}</option>
 
                     @endfor
                 </select>
