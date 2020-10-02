@@ -13,16 +13,19 @@ class CreateShoppingItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shopping_items', function (Blueprint $table) {
+        Schema::create('shoppingitems', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id')->nullable();
             $table->unsignedBigInteger('movie_id');
             $table->unsignedInteger('count');
+            $table->unsignedInteger('price');
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
         });
     }
@@ -34,13 +37,14 @@ class CreateShoppingItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('shopping_items', function (Blueprint $table) {
+        Schema::table('shoppingitems', function (Blueprint $table) {
 
+            $table->dropForeign(['user_id']);
             $table->dropForeign(['order_id']);
             $table->dropForeign(['movie_id']);
 
 
         });
-        Schema::dropIfExists('shopping_items');
+        Schema::dropIfExists('shoppingitems');
     }
 }

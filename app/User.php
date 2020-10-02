@@ -10,6 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function orders() // table之間的關係
+    {
+        
+        return $this->hasMany('App\Order'); //()內為上述的檔案位置
+
+    }
+
     /**
      * The attributes that are mass assignable.
      *
