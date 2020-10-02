@@ -10907,3 +10907,28 @@ a.text-dark:focus {
   display: flex;
 }
 
+.table_row {
+  width: 20%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+th {
+  width: 20%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.shopping_car_img {
+  width: 100px;
+}
+
+.shoppingitem_for_right {
+  float: right;
+}
+
+.shoppingitem_total_fee {
+  position: relative;
+  right: 0;
+}
+
