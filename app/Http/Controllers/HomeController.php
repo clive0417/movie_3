@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Movie;
 use App\Genre;
 use App\Language;
+use Illuminate\Support\Facades\Auth;
 // 匯入DB資料使用model  
 
 class HomeController extends Controller
@@ -60,6 +61,7 @@ class HomeController extends Controller
     public function show(Movie $movie)
     {
 
+        $id = Auth::id();
         $genres = $movie->genres;
         $languages =$movie->languages;
         $genresString = null ;
@@ -84,7 +86,7 @@ class HomeController extends Controller
 
 
 
-        return view('show', ['movie' => $movie,'genresString' =>$genresString, 'languagesString' => $languagesString]);
+        return view('show', ['movie' => $movie,'genresString' =>$genresString, 'languagesString' => $languagesString,'user_id' => $id]);
         //return view('home');
     }
 }
