@@ -35,7 +35,7 @@ class OrderController extends Controller
         // Log::info($orders);
         // Log::info("test");
         
-        return view('orders.index',['orders'=>$orders]);
+        return view('orders.show',['orders'=>$orders]);
     }
 
     /**
