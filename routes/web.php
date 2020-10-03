@@ -46,13 +46,13 @@ Route::resource('shoppingitems','ShoppingitemController');
     //PUT	 /shoppingitems/{id}	      update	movie.update [更新產品功能頁面]
     //DELETE /shoppingitems/{id}         destroy	movie.destroy [刪除]   /
 
-Route::resource('order','ShoppingitemController');
+Route::resource('orders','OrderController');
 
     //動詞	  路徑	             行為	     路由名稱                                  
-   //GET	 /order   	          index	    movie  [總表]                              //D                      
-    //GET	 /order/create 	  create   	movie.create [Create 頁面]                 //D 
-    //POST   /order              store   	movie.store [存資料 / create DB 互動]
-    //GET	 /order/{id}         show	    movie.show [顯示單一產品頁面-->本次不需要]
-    //GET	 /order/{id}/edit	  edit	    movie.edit [edit 頁面]
-    //PUT	 /order/{id}	      update	movie.update [更新產品功能頁面]
-    //DELETE /order/{id}         destroy	movie.destroy [刪除]    
+   //GET	 /order   	          index	    order  [總表]                              //D                      
+    //GET	 /order/create 	  create   	order.create [Create 頁面]                 //D 
+    //POST   /order              store   	order.store [存資料 / create DB 互動]
+    //GET	 /order/{id}         show	    order.show [顯示單一產品頁面-->本次不需要]
+    //GET	 /order/{id}/edit	  edit	    order.edit [edit 頁面]
+    //PUT	 /order/{id}	      update	order.update [更新產品功能頁面]
+    //DELETE /order/{id}         destroy	order.destroy [刪除]    
