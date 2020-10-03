@@ -70,15 +70,8 @@
                                     購物車清單
                                 </a>
 
-                                {{-- a結帳"--}}
-                                <a class="dropdown-item" href="#結帳" onclick="event.preventDefault();
-                                document.getElementById('checkout').submit();">
-                                    結帳
-                                </a>
-
-                                <form id="checkout" action="#購物車清單" method="GET" style="display: none;">
-                                    @csrf
-                                </form>
+ 
+                                
                             </div>
 
 
@@ -95,6 +88,9 @@
                                     onclick="event.preventDefault();
                                                                                  document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ action('OrderController@show',Auth::user()->id) }}">
+                                    個人訂單查詢
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -119,6 +115,9 @@
 
                                 <a class="dropdown-item " href="{{ action('MovieController@create') }}" >
                                     新增商品
+                                </a>
+                                <a class="dropdown-item " href="{{ action('OrderController@index') }}" >
+                                    訂單總覽
                                 </a>
 
 
