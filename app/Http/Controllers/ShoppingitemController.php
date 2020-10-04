@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Movie;
 use App\Genre;
 use App\Language;
@@ -63,6 +64,29 @@ class ShoppingitemController extends Controller
         $shoppingitem->save();
 
         return redirect('/shoppingitems');
+    }
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Shoppingitem;  $Shoppingitem
+     * @return \Illuminate\Http\Response
+     */
+
+    public function update(Request $request )
+    {
+ 
+        // [2020-10-04 12:45:15] local.INFO: array (
+        //     '_method' => 'put',
+        //     'shoppingitem_id' => '8',
+        //     'shoppingitem_count' => '10',
+        //   )  
+
+        $shoppingitem = Shoppingitem::where('id');
+        DB::table('shoppingitems')->where('id',$request['shoppingitem_id'])->update(['count' => $request['count']]);
+        
+
+
     }
 
 

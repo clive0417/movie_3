@@ -85,7 +85,6 @@ $(document).ready(function() {
             //console.log(actionUrl);
             
             $.post(actionUrl,{_method:'delete'}).done(function() {
-                console.log('test');
                 location.href = '/orders';//重新整理頁面 
     
             });
@@ -94,6 +93,16 @@ $(document).ready(function() {
     
         
     };
+    changecount =function (id,value) {
+
+        $.post("/shoppingitems/"+id,{_method:'put',shoppingitem_id:id,count:value}).done(function() {
+
+            location.href = '/shoppingitems';//重新整理頁面 
+
+        });
+        
+
+    }
     
 
         
@@ -101,18 +110,18 @@ $(document).ready(function() {
         //1.add 設立監聽item 變數 in js  muti 
         //2. set up 監聽器 [input  不行就用blur]
         
-        var changes = document.querySelectorAll('.shoppingitem_table_count');
-        console.log(changes);
+
     
     
-         //2. set up 監聽器 [input  不行就用blur]
-        changes.forEach(change => {
-            change.addEventListener('blur', function (e){
-                newCount = e.target.value;
-                console.log("xx");
+        //  //2. set up 監聽器 [input  不行就用blur]
+        // changes.forEach(change => {
+        //     change.addEventListener('blur', function (e){
+        //         newCount = e.target.value;
+        //         console.log("xx");
     
-            });
-        });
+        //     });
+        // });
+    
     
             
     
