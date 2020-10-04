@@ -8,12 +8,16 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle test" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        年份 [暫時先以假資料]
+                        語言
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button">2020</button>
-                        <button class="dropdown-item" type="button">2019</button>
-                        <button class="dropdown-item" type="button">2018</button>
+                        @foreach ($languages as $key=> $language)
+                        @if(isset($_GET['genre_id']))
+                        <a href="{{action('HomeController@index',['language_id'=> $language->id,'genre_id'=>$_GET['genre_id'] ])}}" class="dropdown-item" type="button">{{$language->name}}</a>
+                        @else 
+                        <a href="{{action('HomeController@index',['language_id'=> $language->id])}}" class="dropdown-item" type="button">{{$language->name}}</a>
+                        @endif
+                        @endforeach
                     </div>
                 </div>
 
@@ -24,7 +28,11 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         @foreach ($genres as $key=> $genre)
-                        <a href="{{action('HomeController@indexWithGenre',$genre->id)}}" class="dropdown-item" type="button">{{$genre->name}}</a>
+                        @if(isset($_GET['language_id']))
+                        <a href="{{action('HomeController@index',['genre_id'=> $genre->id,'language_id'=>$_GET['language_id'] ])}}" class="dropdown-item" type="button">{{$genre->name}}</a>
+                        @else 
+                        <a href="{{action('HomeController@index',['genre_id'=> $genre->id])}}" class="dropdown-item" type="button">{{$genre->name}}</a>
+                        @endif
                         @endforeach
                     </div>
                 </div>
@@ -42,7 +50,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$movie->title}}</h5>
                             <p>價格 NTD: {{$movie->price}} </p>
-                            <a href="{{action('HomeController@show',$movie->id)}}" class="btn btn-primary">View detail</a>
+                            <a href="{{action('MovieController@show',$movie->id)}}" class="btn btn-primary">View detail</a>
                         </div>                           
                         
 
