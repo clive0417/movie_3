@@ -30,16 +30,42 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $movies = Movie::all();
         $genres = Genre::all();
+        $languages =Language::all();
+
+        // $XX=var_dump($_GET);
+        // Log::info('get'.$XX);
+        if (isset($_GET['genre_id'])&&isset($_GET['language_id'])) {
+            $movies = Movie::whereHas('genres', function($genrequery) {
+                $genrequery->where('genres.id', $_GET['genre_id']);
+            })->whereHas('languages', function($languagequery) {
+                $languagequery->where('languages.id', $_GET['language_id']);
+            })->get();
+        }elseif(isset($_GET['genre_id'])){
+            $movies = Movie::whereHas('genres', function($genrequery) {
+                $genrequery->where('genres.id', $_GET['genre_id']);
+            })->get();
+
+        }elseif(isset($_GET['language_id'])) {
+            $movies = Movie::whereHas('languages', function($languagequery) {
+                $languagequery->where('languages.id', $_GET['language_id']);
+            })->get();
+
+        }else {
+            $movies = Movie::all();
+
+        }
 
 
 
 
 
-        return view('home', ['movies' => $movies,'genres'=> $genres]);
+
+
+        return view('home', ['movies' => $movies,'languages'=>$languages,'genres'=> $genres]);
         //return view('home');
     }
 
