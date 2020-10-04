@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Movie;
 use App\Genre;
 use App\Language;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use Tmdb\Laravel\Facades\Tmdb; // optional for Laravel ≥5.5
@@ -62,11 +63,15 @@ class MovieController extends Controller
         //處理genre資料填入 start
         //
         $genreDataArray = [];
+
+
         $genreApiArray = $movieApiInfo['genres'];
+        Log::info($genreApiArray);
         // 將API 資料轉成單純的已key 為0,1,2,.... 的Array 
         foreach ($genreApiArray as $key => $genrename) {
             array_push($genreDataArray, $genrename['name']);
         }
+        
 
 
         //用for each firstOrcreate [帶入圍單純數字為key的array]
@@ -103,8 +108,34 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        // $isCreate = request()->is('*create');
-        // return view('movies.show', ['movie' => $movie, 'isCreate' => $isCreate ]);
+
+        $id = Auth::id();
+        $genres = $movie->genres;
+        $languages =$movie->languages;
+        $genresString = null ;
+        
+        // 將讀取出來的genres 轉換成 String
+        for ($i=0; $i <count($genres); $i++) {
+            //Log::info($genres[$i]['name'] );
+            $genresString=$genresString.$genres[$i]['name'];
+            $genresString=$genresString. ",";
+            
+        }
+        $languagesString = null ;
+        for ($i=0; $i <count($languages); $i++) {
+            //Log::info($genres[$i]['name'] );
+            $languagesString = $languagesString.$languages[$i]['name'];
+            $languagesString = $languagesString. ",";
+            
+        }
+
+
+
+
+
+
+        return view('movies.show', ['movie' => $movie,'genresString' =>$genresString, 'languagesString' => $languagesString,'user_id' => $id]);
+        //return view('home');
     }
 
 

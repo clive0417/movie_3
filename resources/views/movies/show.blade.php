@@ -55,13 +55,15 @@
 
 
                 <label>購買數量</label>
-                <select name="count" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                {{-- <select name="count" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                     <option selected>Choose...</option>
                     @for ($i = 1; $i < 10; $i++) 
                         <option name="count" value="{{$i}}">{{$i}}</option>
 
                     @endfor
-                </select>
+                </select> --}}
+                <input type="number" name="count" min="1" max="99" required >
+                <br>
                 <button type="submit" class="btn btn-primary">加入購物車</button>
                 <button type="button" class="btn btn-default" onclick="window.history.back()">cancel</button>
 
