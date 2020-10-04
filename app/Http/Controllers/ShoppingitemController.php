@@ -62,7 +62,7 @@ class ShoppingitemController extends Controller
         $shoppingitem->fill($request->all());
         $shoppingitem->save();
 
-        return redirect('/home');
+        return redirect('/shoppingitems');
     }
 
 
