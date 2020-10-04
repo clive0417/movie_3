@@ -24,7 +24,7 @@
     <div class="page-content">
         <div class="container">
             <!-- 購買清單 start -->
-            <table class="table_box">
+            <table class="table_box table_shop_list">
                 <thead>
                     <tr>
                         <th>商品名稱</th>
@@ -36,9 +36,9 @@
                 <tbody>
                     @foreach ($shoppingitems as $shoppingitem)
                     <tr class="item">
-                        <td class="table_row">{{$shoppingitem->movie->title}}<br><img class="shopping_car_img"
-                                src={{$shoppingitem->movie->posterUrl}}></td>
-                        <td class="table_row">{{$shoppingitem->count}}</td>
+                        <td class="table_row"><a href="/movies/{{$shoppingitem->movie->id}}">{{$shoppingitem->movie->title}}</a><br><a href="/movies/{{$shoppingitem->movie->id}}"><img  class="shopping_car_img"
+                            src={{$shoppingitem->movie->posterUrl}} ></a></td>
+                        <td><input class="shoppingitem_table_count" type="number" name="count" value="{{$shoppingitem->count}}"></td>
                         <td class="table_row">{{$shoppingitem->price}}</td>
                         <td class="table_row"><button class="btn btn-danger"
                                 onclick="deleteShoppingitem({{$shoppingitem->id}})">Delete</button></td>
@@ -52,7 +52,7 @@
 
                 @csrf
                 <p>地址</p>
-                <input type="text" name="address" value="請輸入地址">
+                <input type="text" name="address"  placeholder="請輸入地址" required>
                 <input type="hidden" name="user_id" value={{$user_id}}>
                 <input type="hidden" name="fee" value={{$fee}}>
 
@@ -67,8 +67,8 @@
                 </div>
                 <br>
                 <br>
-                <button type="button" class="shoppingitem_for_right btn btn-default"
-                    onclick="window.history.back()">cancel</button>
+
+                <a class="shoppingitem_for_right btn btn-default" href="{{ action('HomeController@index') }}">繼續購物</a>
                 <button type="submit" class="shoppingitem_for_right btn btn-primary">Submit</button>
 
             </form>
