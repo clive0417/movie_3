@@ -49740,70 +49740,84 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
+$(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 
-deleteMovie = function deleteMovie(id) {
-  var result = confirm('Do you want to delete movie?'); //console.log(result); 驗證result 帶入0,1 OK
+  deleteMovie = function deleteMovie(id) {
+    var result = confirm('Do you want to delete movie?'); //console.log(result); 驗證result 帶入0,1 OK
 
-  if (result) {
-    var actionUrl = '/movies/' + id; //組合網址
-    //console.log(actionurl);位置驗證OK
-    //console.log(actionUrl);
+    if (result) {
+      var actionUrl = '/movies/' + id; //組合網址
+      //console.log(actionurl);位置驗證OK
+      //console.log(actionUrl);
 
-    $.post(actionUrl, {
-      _method: 'delete'
-    }).done(function () {
-      console.log('test');
-      location.href = '/movies'; //重新整理頁面 
+      $.post(actionUrl, {
+        _method: 'delete'
+      }).done(function () {
+        console.log('test');
+        location.href = '/movies'; //重新整理頁面 
+      });
+    }
+
+    ;
+  };
+
+  deleteShoppingitem = function deleteShoppingitem(id) {
+    var result = confirm('Do you want to delete this item?'); //console.log(result); 驗證result 帶入0,1 OK
+
+    if (result) {
+      var actionUrl = '/shoppingitems/' + id; //組合網址
+      //console.log(actionurl);位置驗證OK
+      //console.log(actionUrl);
+
+      $.post(actionUrl, {
+        _method: 'delete'
+      }).done(function () {
+        location.href = '/shoppingitems'; //重新整理頁面 
+      });
+    }
+
+    ;
+  };
+
+  deleteOrder = function deleteOrder(id) {
+    var result = confirm('Do you want to delete Order?'); //console.log(result); 驗證result 帶入0,1 OK
+
+    if (result) {
+      var actionUrl = '/orders/' + id; //組合網址
+      //console.log(actionurl);位置驗證OK
+      //console.log(actionUrl);
+
+      $.post(actionUrl, {
+        _method: 'delete'
+      }).done(function () {
+        console.log('test');
+        location.href = '/orders'; //重新整理頁面 
+      });
+    }
+
+    ;
+  }; // add shopping item list 
+  //1.add 設立監聽item 變數 in js  muti 
+  //2. set up 監聽器 [input  不行就用blur]
+
+
+  var changes = document.querySelectorAll('.shoppingitem_table_count');
+  console.log(changes); //2. set up 監聽器 [input  不行就用blur]
+
+  changes.forEach(function (change) {
+    change.addEventListener('blur', function (e) {
+      newCount = e.target.value;
+      console.log("xx");
     });
-  }
-
-  ;
-};
-
-deleteShoppingitem = function deleteShoppingitem(id) {
-  var result = confirm('Do you want to delete this item?'); //console.log(result); 驗證result 帶入0,1 OK
-
-  if (result) {
-    var actionUrl = '/shoppingitems/' + id; //組合網址
-    //console.log(actionurl);位置驗證OK
-    //console.log(actionUrl);
-
-    $.post(actionUrl, {
-      _method: 'delete'
-    }).done(function () {
-      location.href = '/shoppingitems'; //重新整理頁面 
-    });
-  }
-
-  ;
-};
-
-deleteOrder = function deleteOrder(id) {
-  var result = confirm('Do you want to delete Order?'); //console.log(result); 驗證result 帶入0,1 OK
-
-  if (result) {
-    var actionUrl = '/orders/' + id; //組合網址
-    //console.log(actionurl);位置驗證OK
-    //console.log(actionUrl);
-
-    $.post(actionUrl, {
-      _method: 'delete'
-    }).done(function () {
-      console.log('test');
-      location.href = '/orders'; //重新整理頁面 
-    });
-  }
-
-  ;
-};
-
-var app = new Vue({
-  el: '#app'
+  });
+  var app = new Vue({
+    el: '#app'
+  });
 });
 
 /***/ }),

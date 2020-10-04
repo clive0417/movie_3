@@ -28,72 +28,106 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-$.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-deleteMovie = function (id) {
-    let result = confirm('Do you want to delete movie?');
-    //console.log(result); 驗證result 帶入0,1 OK
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     
-    if (result) {
-        let actionUrl ='/movies/'+id;//組合網址
-        //console.log(actionurl);位置驗證OK
-        //console.log(actionUrl);
+    deleteMovie = function (id) {
+        let result = confirm('Do you want to delete movie?');
+        //console.log(result); 驗證result 帶入0,1 OK
         
-        $.post(actionUrl,{_method:'delete'}).done(function() {
-            console.log('test');
-            location.href = '/movies';//重新整理頁面 
-
-        });
-
-    };
-
+        if (result) {
+            let actionUrl ='/movies/'+id;//組合網址
+            //console.log(actionurl);位置驗證OK
+            //console.log(actionUrl);
+            
+            $.post(actionUrl,{_method:'delete'}).done(function() {
+                console.log('test');
+                location.href = '/movies';//重新整理頁面 
     
-};
-
-deleteShoppingitem = function (id) {
-    let result = confirm('Do you want to delete this item?');
-    //console.log(result); 驗證result 帶入0,1 OK
+            });
     
-    if (result) {
-        let actionUrl ='/shoppingitems/'+id;//組合網址
-        //console.log(actionurl);位置驗證OK
-        //console.log(actionUrl);
+        };
+    
         
-        $.post(actionUrl,{_method:'delete'}).done(function() {
-            location.href = '/shoppingitems';//重新整理頁面 
-
-        });
-
     };
-
     
-};
-
-
-deleteOrder = function (id) {
-    let result = confirm('Do you want to delete Order?');
-    //console.log(result); 驗證result 帶入0,1 OK
-    
-    if (result) {
-        let actionUrl ='/orders/'+id;//組合網址
-        //console.log(actionurl);位置驗證OK
-        //console.log(actionUrl);
+    deleteShoppingitem = function (id) {
+        let result = confirm('Do you want to delete this item?');
+        //console.log(result); 驗證result 帶入0,1 OK
         
-        $.post(actionUrl,{_method:'delete'}).done(function() {
-            console.log('test');
-            location.href = '/orders';//重新整理頁面 
-
-        });
-
-    };
-
+        if (result) {
+            let actionUrl ='/shoppingitems/'+id;//組合網址
+            //console.log(actionurl);位置驗證OK
+            //console.log(actionUrl);
+            
+            $.post(actionUrl,{_method:'delete'}).done(function() {
+                location.href = '/shoppingitems';//重新整理頁面 
     
-};
+            });
+    
+        };
+    
+        
+    };
+    
+    
+    deleteOrder = function (id) {
+        let result = confirm('Do you want to delete Order?');
+        //console.log(result); 驗證result 帶入0,1 OK
+        
+        if (result) {
+            let actionUrl ='/orders/'+id;//組合網址
+            //console.log(actionurl);位置驗證OK
+            //console.log(actionUrl);
+            
+            $.post(actionUrl,{_method:'delete'}).done(function() {
+                console.log('test');
+                location.href = '/orders';//重新整理頁面 
+    
+            });
+    
+        };
+    
+        
+    };
+    
 
-const app = new Vue({
-    el: '#app',
+        
+    // add shopping item list 
+        //1.add 設立監聽item 變數 in js  muti 
+        //2. set up 監聽器 [input  不行就用blur]
+        
+        var changes = document.querySelectorAll('.shoppingitem_table_count');
+        console.log(changes);
+    
+    
+         //2. set up 監聽器 [input  不行就用blur]
+        changes.forEach(change => {
+            change.addEventListener('blur', function (e){
+                newCount = e.target.value;
+                console.log("xx");
+    
+            });
+        });
+    
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    const app = new Vue({
+        el: '#app',
+    });
+    
+
 });
