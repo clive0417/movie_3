@@ -24,7 +24,7 @@ class ShoppingitemController extends Controller
 
         $id = Auth::id();
 
-        $shoppingitems = Shoppingitem::where('user_id',$id)->whereNull('order_id')->get();
+        $shoppingitems = Shoppingitem::where('user_id',$id)->get();
 
         $fee=0;
 
@@ -34,10 +34,6 @@ class ShoppingitemController extends Controller
 
             $fee=$fee+$shoppingitem['count']*$shoppingitem['price'];
 
-
-
-            
-            // Log::info($fee);
 
         }
         
@@ -82,7 +78,6 @@ class ShoppingitemController extends Controller
         //     'shoppingitem_count' => '10',
         //   )  
 
-        $shoppingitem = Shoppingitem::where('id');
         DB::table('shoppingitems')->where('id',$request['shoppingitem_id'])->update(['count' => $request['count']]);
         
 

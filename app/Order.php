@@ -13,10 +13,10 @@ class Order extends Model
         return $this->belongsTo('App\User'); //()內為上述的檔案位置
 
     }
-    public function shoppingitems() // table之間的關係
+    public function orderitems() // table之間的關係
     {
         
-        return $this->hasMany('App\Shoppingitem'); //()內為上述的檔案位置
+        return $this->hasMany('App\Orderitem'); //()內為上述的檔案位置
 
     }
 }

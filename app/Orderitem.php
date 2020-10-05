@@ -4,14 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shoppingitem extends Model
+class Orderitem extends Model
 {
     //
-    protected $fillable = ['user_id','movie_id','count','price'];
+    protected $fillable = ['user_id','movie_id','order_id','count','price'];
+    
     public function user() // table之間的關係
     {
         
         return $this->belongsTo('App\User'); //()內為上述的檔案位置
+
+    }
+    public function order() // table之間的關係
+    {
+        
+        return $this->belongsTo('App\Order'); //()內為上述的檔案位置
 
     }
 
