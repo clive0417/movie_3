@@ -2,11 +2,15 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Movie extends Model
 {
     //
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $fillable = ['title','TMDB_id','posterUrl','releaseDate','point','price','overview'];
     public function genres()
     {
