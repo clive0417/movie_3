@@ -55,6 +55,8 @@ class MovieController extends Controller
         $movie['releaseDate'] = $movieApiInfo['release_date'];
         $movie['point'] = $movieApiInfo['vote_average'];
         $movie['overview'] = $movieApiInfo['overview'];
+        $dateArray =explode( "-",  $movie['releaseDate'] );
+        $movie['year']= $dateArray[0];
 
         //Log::info($movieApiInfo);
         $movie->save();

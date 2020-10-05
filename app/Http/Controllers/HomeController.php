@@ -32,32 +32,41 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $movies = Movie::all();
+
+ 
+        $movies = new Movie; // for test
         $genres = Genre::all();
         $languages =Language::all();
+        $request->get('genre_id','language_id');
+        // Log::info($request);
+        
 
-        // $XX=var_dump($_GET);
+        // $XX=var_dump($movies2);
         // Log::info('get'.$XX);
-        if (isset($_GET['genre_id'])&&isset($_GET['language_id'])) {
-            $movies = Movie::whereHas('genres', function($genrequery) {
+        if (isset($request['genre_id'])) {
+            $movies = $movies->whereHas('genres', function($genrequery) {
                 $genrequery->where('genres.id', $_GET['genre_id']);
-            })->whereHas('languages', function($languagequery) {
+            });
+        };
+        if (isset($request['language_id'])) {
+            $movies = $movies->whereHas('languages', function($languagequery) {
                 $languagequery->where('languages.id', $_GET['language_id']);
-            })->get();
-        }elseif(isset($_GET['genre_id'])){
-            $movies = Movie::whereHas('genres', function($genrequery) {
-                $genrequery->where('genres.id', $_GET['genre_id']);
-            })->get();
+            });
+        };
+        if (isset($request['year'])) {
+            $movies = $movies->where('year', $_GET['year']);
 
-        }elseif(isset($_GET['language_id'])) {
-            $movies = Movie::whereHas('languages', function($languagequery) {
-                $languagequery->where('languages.id', $_GET['language_id']);
-            })->get();
+        };
 
-        }else {
-            $movies = Movie::all();
+        $genres = Genre::all();
+        $languages =Language::all();
+        $movies = $movies->get();
 
-        }
+        
+
+
+
+
 
 
 
