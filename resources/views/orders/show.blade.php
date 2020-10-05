@@ -43,13 +43,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($order->shoppingitems as $key=>$shoppingitem)
+                        @foreach ($order->orderitems as $key=>$orderitem)
 
                         <tr class="item">
-                            <td class="table_row">{{$shoppingitem->movie->title}}<br><img class="shopping_car_img"
-                                    src={{$shoppingitem->movie->posterUrl}}></td>
-                            <td class="table_row">{{$shoppingitem->count}}</td>
-                            <td class="table_row">{{$shoppingitem->price}}</td>
+                            <td class="table_row">{{$orderitem->movie->title}}<br><img class="shopping_car_img"
+                                    src={{$orderitem->movie->posterUrl}}></td>
+                            <td class="table_row">{{$orderitem->count}}</td>
+                            <td class="table_row">{{$orderitem->price}}</td>
                             
 
 
