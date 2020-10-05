@@ -68,6 +68,7 @@ class OrderController extends Controller
             DB::table('orderitems')->insert(['user_id' => $shoppingitem[0]->user_id,'order_id' => $lastid,
             'movie_id'=> $shoppingitem[0]->movie_id,'count' =>$shoppingitem[0]->count,'price'=>$shoppingitem[0]->price
             ]);
+            DB::table('shoppingitems')->where('id',$shoppingitemId)->update(['done' => 1]);
 
 
             // $orderitem->fill($shoppingitem[0]->all());

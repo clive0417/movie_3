@@ -24,7 +24,7 @@ class ShoppingitemController extends Controller
 
         $id = Auth::id();
 
-        $shoppingitems = Shoppingitem::where('user_id',$id)->get();
+        $shoppingitems = Shoppingitem::where('user_id',$id)->whereNull('done')->get();
 
         $fee=0;
 
