@@ -52,6 +52,8 @@
                 <input type="hidden" name="user_id" class="form-control" value="{{$user_id}}">
                 <input type="hidden" name="movie_id" class="form-control" value="{{$movie->id}}">
                 <input type="hidden" name="price" class="form-control" value="{{$movie->price}}">
+                <input type="hidden" name="title" class="form-control" value="{{$movie->title}}">
+                <input type="hidden" name="posterUrl" class="form-control" value="{{$movie->posterUrl}}">
 
 
                 <label>購買數量</label>

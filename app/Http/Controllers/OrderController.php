@@ -72,10 +72,13 @@ class OrderController extends Controller
             $shoppingitem = Shoppingitem::where('id', $shoppingitemId)->get();
             DB::table('orderitems')->insert(['user_id' => $shoppingitem[0]->user_id,'order_id' => $lastid,
             'movie_id'=> $shoppingitem[0]->movie_id,'count' =>$shoppingitem[0]->count,'price'=>$shoppingitem[0]->price
+              ,'title'=>$shoppingitem[0]->title,'posterUrl'=>$shoppingitem[0]->posterUrl
+            //  ,'title'=> Movie::where('id',$shoppingitem[0]->movie_id)->title,'posterUrl'=> Movie::where('id',$shoppingitem[0]->movie_id)->posterUrl
             ]);
             DB::table('shoppingitems')->where('id',$shoppingitemId)->update(['done' => 1]);
+            
 
-
+            // Log::info(Movie::where('id',$shoppingitem[0]->movie_id)->get()[0]->id); 如果要在 Controller 從不同table 的轉換寫法
             // $orderitem->fill($shoppingitem[0]->all());
             // $orderitem->save();
 
@@ -87,6 +90,7 @@ class OrderController extends Controller
 
             
         }
+
 
 
 
@@ -113,4 +117,6 @@ class OrderController extends Controller
         //
         $order->delete();
     }
+
+
 }
