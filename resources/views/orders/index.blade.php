@@ -46,8 +46,8 @@
                         @foreach ($order->orderitems as $key=>$orderitem)
 
                         <tr class="item">
-                            <td class="table_row">{{$orderitem->movie->title}}<br><img class="shopping_car_img"
-                                    src={{$orderitem->movie->posterUrl}}></td>
+                            <td class="table_row">{{App\Movie::withTrashed()->find($orderitem->movie_id)->title}}<br><img class="shopping_car_img"
+                                    src={{App\Movie::withTrashed()->find($orderitem->movie_id)->posterUrl}}></td>
                             <td class="table_row">{{$orderitem->count}}</td>
                             <td class="table_row">{{$orderitem->price}}</td>
                             

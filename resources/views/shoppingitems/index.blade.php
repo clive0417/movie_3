@@ -36,10 +36,10 @@
                 <tbody>
                     @foreach ($shoppingitems as $shoppingitem)
                     <tr class="item">
-                        <td class="table_row"><a href="/movies/{{$shoppingitem->movie->id}}">{{$shoppingitem->movie->title}}</a><br><a href="/movies/{{$shoppingitem->movie->id}}"><img  class="shopping_car_img"
-                            src={{$shoppingitem->movie->posterUrl}} ></a></td>
+                        <td class="table_row"><a href="/movies/{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->id}}">{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->title}}</a><br><a href="/movies/{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->id}}">{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->title}}"><img  class="shopping_car_img"
+                            src={{App\Movie::withTrashed()->find($shoppingitem->movie_id)->posterUrl}} ></a></td>
                         <td><input class="shoppingitem_table_count" type="number" onblur="changecount({{$shoppingitem->id}},this.value)" name="count" value="{{$shoppingitem->count}}"></td>
-                        <td class="table_row">{{$shoppingitem->price}}</td>
+                        <td class="table_row">{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->price}}</td>
                         <td class="table_row"><button class="btn btn-danger"
                                 onclick="deleteShoppingitem({{$shoppingitem->id}})">Delete</button></td>
                     </tr>
