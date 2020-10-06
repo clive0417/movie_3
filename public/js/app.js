@@ -49720,6 +49720,11 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    replace = _require.replace;
+
+var newurl = "";
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -49802,14 +49807,25 @@ $(document).ready(function () {
     ;
   };
 
-  changecount = function changecount(id, value) {
-    $.post("/shoppingitems/" + id, {
-      _method: 'put',
-      shoppingitem_id: id,
-      count: value
-    }).done(function () {
-      location.href = '/shoppingitems'; //重新整理頁面 
-    });
+  removegetgenre = function removegetgenre(id) {
+    oldurl = window.location.href;
+    newurl = oldurl.replace("genre_id=".concat(id), "");
+    console.log(newurl);
+    location.href = newurl; // "http://localhost:8000/home?&language_id=1"genre_id=8
+  };
+
+  removegetyear = function removegetyear(id) {
+    oldurl = window.location.href;
+    newurl = oldurl.replace("year=".concat(id), "");
+    console.log(newurl);
+    location.href = newurl; // "http://localhost:8000/home?&language_id=1"genre_id=8
+  };
+
+  removegetlanguage = function removegetlanguage(id) {
+    oldurl = window.location.href;
+    newurl = oldurl.replace("language_id=".concat(id), "");
+    console.log(newurl);
+    location.href = newurl; // "http://localhost:8000/home?&language_id=1"genre_id=8
   }; // add shopping item list 
   //1.add 設立監聽item 變數 in js  muti 
   //2. set up 監聽器 [input  不行就用blur]

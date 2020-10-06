@@ -22,8 +22,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders =Order::all();
-        // Log::info($orders);
+        $orders = Order::all();
+
+
+
+
+
         // Log::info("test2");
         
         return view('orders.index',['orders'=>$orders]);
@@ -33,6 +37,7 @@ class OrderController extends Controller
     {
         $id = Auth::id();
         $orders =Order::where('user_id',$id)->get();
+
         // Log::info($orders);
         // Log::info("test");
         

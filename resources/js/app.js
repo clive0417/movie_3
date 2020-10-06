@@ -4,6 +4,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+const { replace } = require('lodash');
+var newurl= "";
+
+
 
  
 require('./bootstrap'); 
@@ -93,16 +97,34 @@ $(document).ready(function() {
     
         
     };
-    changecount =function (id,value) {
+    removegetgenre= function (id) {
+        oldurl = window.location.href;
+        newurl=oldurl.replace(`genre_id=${id}`,"");
+        console.log(newurl);
+        location.href = newurl;
+        // "http://localhost:8000/home?&language_id=1"genre_id=8
 
-        $.post("/shoppingitems/"+id,{_method:'put',shoppingitem_id:id,count:value}).done(function() {
 
-            location.href = '/shoppingitems';//重新整理頁面 
+    };
+    removegetyear= function (id) {
+        oldurl = window.location.href;
+        newurl=oldurl.replace(`year=${id}`,"");
+        console.log(newurl);
+        location.href = newurl;
+        // "http://localhost:8000/home?&language_id=1"genre_id=8
 
-        });
-        
 
-    }
+    };
+    removegetlanguage= function (id) {
+        oldurl = window.location.href;
+        newurl=oldurl.replace(`language_id=${id}`,"");
+        console.log(newurl);
+        location.href = newurl;
+        // "http://localhost:8000/home?&language_id=1"genre_id=8
+
+
+    };
+
     
 
         
