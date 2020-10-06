@@ -97,6 +97,16 @@ $(document).ready(function() {
     
         
     };
+    changecount =function (id,value) {
+
+        $.post("/shoppingitems/"+id,{_method:'put',shoppingitem_id:id,count:value}).done(function() {
+
+            location.href = '/shoppingitems';//重新整理頁面 
+
+        });
+
+
+    }
     removegetgenre= function (id) {
         oldurl = window.location.href;
         newurl=oldurl.replace(`genre_id=${id}`,"");
@@ -116,7 +126,7 @@ $(document).ready(function() {
 
     };
     removegetlanguage= function (id) {
-        oldurl = window.location.href;
+        oldurl = window.location.href;//便會得到網址
         newurl=oldurl.replace(`language_id=${id}`,"");
         console.log(newurl);
         location.href = newurl;

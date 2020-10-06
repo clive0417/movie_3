@@ -49807,6 +49807,16 @@ $(document).ready(function () {
     ;
   };
 
+  changecount = function changecount(id, value) {
+    $.post("/shoppingitems/" + id, {
+      _method: 'put',
+      shoppingitem_id: id,
+      count: value
+    }).done(function () {
+      location.href = '/shoppingitems'; //重新整理頁面 
+    });
+  };
+
   removegetgenre = function removegetgenre(id) {
     oldurl = window.location.href;
     newurl = oldurl.replace("genre_id=".concat(id), "");
@@ -49822,7 +49832,8 @@ $(document).ready(function () {
   };
 
   removegetlanguage = function removegetlanguage(id) {
-    oldurl = window.location.href;
+    oldurl = window.location.href; //便會得到網址
+
     newurl = oldurl.replace("language_id=".concat(id), "");
     console.log(newurl);
     location.href = newurl; // "http://localhost:8000/home?&language_id=1"genre_id=8

@@ -76,7 +76,7 @@ class HomeController extends Controller
 
 
 
-        return view('home', ['movies' => $movies,'languages'=>$languages,'genres'=> $genres,'years'=>$years]);
+        return view('home', ['movies' => $movies,'languages'=>$languages,'genres'=> $genres,'years'=>$years,'request'=>$request]);
         // 
         //return view('home');
     }
