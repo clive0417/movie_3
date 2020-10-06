@@ -34,27 +34,29 @@ class HomeController extends Controller
     {
 
  
-        $movies = new Movie; // for test
+        $movies = new Movie;
+
+        $years= Movie::all()->pluck('year'); 
         $genres = Genre::all();
         $languages =Language::all();
         $request->get('genre_id','language_id');
-        // Log::info($request);
+
         
 
         // $XX=var_dump($movies2);
         // Log::info('get'.$XX);
         if (isset($request['genre_id'])) {
-            $movies = $movies->whereHas('genres', function($genrequery) {
-                $genrequery->where('genres.id', $_GET['genre_id']);
+            $movies = $movies->whereHas('genres', function($genrequery) use($request) {
+                $genrequery->where('genres.id', $request['genre_id']);
             });
         };
         if (isset($request['language_id'])) {
-            $movies = $movies->whereHas('languages', function($languagequery) {
-                $languagequery->where('languages.id', $_GET['language_id']);
+            $movies = $movies->whereHas('languages', function($languagequery) use($request) {
+                $languagequery->where('languages.id', $request['language_id']);
             });
         };
         if (isset($request['year'])) {
-            $movies = $movies->where('year', $_GET['year']);
+            $movies = $movies->where('year', $request['year']);
 
         };
 
@@ -74,7 +76,8 @@ class HomeController extends Controller
 
 
 
-        return view('home', ['movies' => $movies,'languages'=>$languages,'genres'=> $genres]);
+        return view('home', ['movies' => $movies,'languages'=>$languages,'genres'=> $genres,'years'=>$years]);
+        // 
         //return view('home');
     }
 
