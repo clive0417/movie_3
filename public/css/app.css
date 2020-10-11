@@ -10903,10 +10903,6 @@ a.text-dark:focus {
   display: inline;
 }
 
-.movie_area {
-  display: flex;
-}
-
 .table_row {
   width: 20%;
   vertical-align: middle;
@@ -10921,6 +10917,9 @@ th {
 
 .shopping_car_img {
   width: 100px;
+  height: 200px;
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .shoppingitem_for_right {
@@ -10938,5 +10937,29 @@ th {
 
 .right_in_homepage_cardheader {
   right: 5px;
+}
+
+.single_movie_card {
+  display: inline;
+  width: 100px;
+}
+
+.movie_pic {
+  display: inline;
+}
+
+.movie_div {
+  display: inline;
+}
+
+.movie_des {
+  display: inline;
+}
+
+.movie_zone {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 

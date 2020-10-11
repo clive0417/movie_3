@@ -12,16 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 //[Route::method 網址位置, 對應Controller] 
 // genre 的篩選功能 
-Route::get('/home/genre/{genre}', 'HomeController@indexWithGenre')->name('home');
+
 
 Route::get('/home/{movie}', 'HomeController@show')->name('home');
 

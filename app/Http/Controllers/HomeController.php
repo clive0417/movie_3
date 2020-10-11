@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 // 匯入DB資料使用model  
+use DB;
 use App\Movie;
 use App\Genre;
 use App\Language;
@@ -15,15 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -36,9 +29,9 @@ class HomeController extends Controller
  
         $movies = new Movie;
 
-        $years= Movie::all()->pluck('year'); 
-        $genres = Genre::all();
-        $languages =Language::all();
+
+        $years = DB::table('movies')->groupBy('year')->orderby('year', 'DESC')->pluck('year');
+        $genres = DB::table('genres')->orderBy('name','asc')->get();
         $request->get('genre_id','language_id');
 
         
@@ -60,7 +53,7 @@ class HomeController extends Controller
 
         };
 
-        $genres = Genre::all();
+
         $languages =Language::all();
         $movies = $movies->get();
 
@@ -81,19 +74,7 @@ class HomeController extends Controller
         //return view('home');
     }
 
-    public function indexWithGenre(Genre $genre)
-    {
-        
 
-
-        $movies = Movie::whereHas('genres', function($query) use($genre) {
-            $query->where('genres.id', $genre['id']);
-        })->get();
-
-        $genres = Genre::all();
-        return view('home', ['movies' => $movies,'genres'=> $genres]);
-        //return view('home');
-    }
 
 
     public function show(Movie $movie)

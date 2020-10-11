@@ -25,7 +25,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ action('HomeController@index') }}">
                     <!--專案nav bar 在layout .app.blade-->
                     movie DVD sell web
                 </a>
@@ -55,8 +55,10 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
-                        {{--@else為登入 註冊--}}
+
                         @else
+                        {{-- 開始登入頁面nav 處理 --}}
+
 
                         {{-- li 為購物車 --}}
                         <li class="nav-item dropdown">
@@ -66,12 +68,12 @@
                             </a>
                             {{-- div購物車清單"--}}
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{action('ShoppingitemController@index')}}" >
+                                <a class="dropdown-item" href="{{action('ShoppingitemController@index')}}">
                                     購物車清單
                                 </a>
 
- 
-                                
+
+
                             </div>
 
 
@@ -113,15 +115,12 @@
                                 </a>
 
 
-                                <a class="dropdown-item " href="{{ action('MovieController@create') }}" >
+                                <a class="dropdown-item " href="{{ action('MovieController@create') }}">
                                     新增商品
                                 </a>
-                                <a class="dropdown-item " href="{{ action('OrderController@index') }}" >
+                                <a class="dropdown-item " href="{{ action('OrderController@index') }}">
                                     訂單總覽
                                 </a>
-
-
-
                             </div>
 
 
@@ -137,7 +136,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('page_title')
             @yield('content')

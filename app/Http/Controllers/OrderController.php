@@ -100,7 +100,7 @@ class OrderController extends Controller
         
         //Log::info( $_POST);
 
-        return redirect('/home');
+        return redirect('/');
 
     }
 
