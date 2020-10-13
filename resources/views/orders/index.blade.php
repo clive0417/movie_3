@@ -29,8 +29,12 @@
             <ul class="list-group">
 
                 @foreach ($orders as $key=>$order)
+                <div class="order_info">訂購人:{{$order->user->name}}</div>
                 <div class="order_info">訂單編號:{{$order->id}}</div>
                 <div class="order_info">下單時間:{{$order->created_at}}</div>
+                <div class="order_info">總金額:{{$order->fee}}</div>
+
+
                 <table class="table_box" style="border:3px #cccccc solid;" cellpadding="10" border="1">
 
                     <thead>
@@ -45,6 +49,7 @@
                         @foreach ($order->orderitems as $key=>$orderitem)
 
                         <tr class="item">
+
                             <td class="table_row">{{App\Movie::withTrashed()->find($orderitem->movie_id)->title}}<br><img class="shopping_car_img"
                                     src={{App\Movie::withTrashed()->find($orderitem->movie_id)->posterUrl}}></td>
                             <td class="table_row">{{$orderitem->count}}</td>

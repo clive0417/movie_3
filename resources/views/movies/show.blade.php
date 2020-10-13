@@ -67,7 +67,7 @@
         
                         <button type="submit" class="btn btn-primary">加入購物車</button>
                         @endif
-                        <button type="button" class="btn btn-default" onclick="window.history.back()">取消</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back()">取消</button>
         
                     </form>
         
