@@ -6,12 +6,16 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4 class="text-uppercase">Movie Admin table</h4>
+                        <br>
+                        <br>
+                        <h4 class="text-uppercase text-white">電影管理總表</h4>
+                        <br>
+                        <br>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">Home</a>
+                            <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">首頁</a>
                             </li>
 
-                            <li class="breadcrumb-item active">Movie Admin table</li>
+                            <li class="breadcrumb-item active">電影管理總表</li>
                         </ol>
                     </div>
                 </div>
@@ -25,8 +29,11 @@
     <div class="page-content">
         <div class="container">
             <div class="toolbox">
-            <a href="/movies/create" class="btn btn-primary">create Movie</a>
+
+            <a href="/movies/create" class="btn btn-primary">新增商品</a>
             </div>
+            <br>
+            <br>
             
             <ul class="list-group">
                 @foreach ($movies as $key=>$movie)
@@ -40,8 +47,8 @@
 
 
                         <span class="float-right">
-                            <a href="{{ action('MovieController@edit',$movie->id) }}" class="btn btn-primary">Edit</a>
-                            <button class="btn btn-danger" onclick="deleteMovie({{$movie->id}})">Delete</button>
+                            <a href="{{ action('MovieController@edit',$movie->id) }}" class="btn btn-primary">編輯</a>
+                            <button class="btn btn-danger" onclick="deleteMovie({{$movie->id}})">刪除</button>
                         </span>
                     </li>    
                 @endforeach

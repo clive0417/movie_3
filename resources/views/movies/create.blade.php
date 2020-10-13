@@ -6,13 +6,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4 class="text-uppercase">Create Movie</h4>
+                        <h4 class="text-uppercase text-white">新增商品</h4>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">Home</a>
+                            <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">首頁</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{{ action('MovieController@index') }}">Movie Admin table</a>
+                            <li class="breadcrumb-item"><a href="{{ action('MovieController@index') }}">電影管理總表</a>
                             </li>
-                            <li class="breadcrumb-item active">Create Movie</li>
+                            <li class="breadcrumb-item active">新增商品</li>
                         </ol>
                     </div>
                 </div>

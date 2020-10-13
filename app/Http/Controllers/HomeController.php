@@ -57,6 +57,7 @@ class HomeController extends Controller
         $languages =Language::all();
         $movies = $movies->get();
 
+
         
 
 

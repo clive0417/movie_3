@@ -19,12 +19,15 @@
     @endif
 
     <div class="form-group">
-        <label>Title</label>
+        <label class="text-white lead">電影名稱</label>
         <input name="title" class="form-control" value="{{$movie->title}}">
-        <label>TMDB ID [請至TMDB官網查詢]</label>
+        <br>
+        <label class="text-white lead">TMDB ID [請至TMDB官網查詢]</label>
         <input name="TMDB_id" class="form-control" value="{{$movie->TMDB_id}}">
-        <label>價格</label>
+        <br>
+        <label class="text-white lead">價格</label>
         <input name="price" class="form-control" value="{{$movie->price}}">
+        <br>
 
 
 
@@ -34,6 +37,6 @@
     <div class="form-group">
 
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="button" class="btn btn-default" onclick="window.history.back()">cancel</button>
+        <button type="submit" class="btn btn-primary">送出</button>
+        <button type="button" class="btn btn-default" onclick="window.history.back()">取消</button>
 </form>

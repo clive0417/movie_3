@@ -6,12 +6,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="text-uppercase">ShoppingCar table</h4>
+                <h4 class="text-uppercase text-white">購物車</h4>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">Home</a>
+                    <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">首頁</a>
                     </li>
 
-                    <li class="breadcrumb-item active">ShoppingCar table</li>
+                    <li class="breadcrumb-item active">購物車</li>
                 </ol>
             </div>
         </div>
@@ -24,7 +24,7 @@
     <div class="page-content">
         <div class="container">
             <!-- 購買清單 start -->
-            <table class="table_box table_shop_list">
+            <table class="table_box table_shop_list" style="border:3px #cccccc solid;" cellpadding="10" border="1">
                 <thead>
                     <tr>
                         <th>商品名稱</th>
@@ -36,7 +36,7 @@
                 <tbody>
                     @foreach ($shoppingitems as $shoppingitem)
                     <tr class="item">
-                        <td class="table_row"><a href="/movies/{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->id}}"><img  class="shopping_car_img"
+                        <td class="table_row">{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->title}}<br><a href="/movies/{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->id}}"><img  class="shopping_car_img"
                             src={{App\Movie::withTrashed()->find($shoppingitem->movie_id)->posterUrl}} ></a></td>
                         <td><input class="shoppingitem_table_count" type="number" onblur="changecount({{$shoppingitem->id}},this.value)" name="count" value="{{$shoppingitem->count}}"></td>
                         <td class="table_row">{{App\Movie::withTrashed()->find($shoppingitem->movie_id)->price}}</td>
@@ -51,7 +51,7 @@
 
 
                 @csrf
-                <p>地址</p>
+                <h3 class="text-white">地址</h3>
                 <input type="text" name="address"  placeholder="請輸入地址" required>
                 <input type="hidden" name="user_id" value={{$user_id}}>
                 <input type="hidden" name="fee" value={{$fee}}>
@@ -62,14 +62,14 @@
 
                 
                 <div>
-                    <h3 class="shoppingitem_total_fee">總計: NTD {{$fee}}</h3>
+                    <h3 class="shoppingitem_total_fee text-white">總計: NTD {{$fee}}</h3>
 
                 </div>
                 <br>
                 <br>
 
-                <a class="shoppingitem_for_right btn btn-default" href="{{ action('HomeController@index') }}">繼續購物</a>
-                <button type="submit" class="shoppingitem_for_right btn btn-primary">Submit</button>
+                <a class="shoppingitem_for_right btn btn-secondary" href="{{ action('HomeController@index') }}">繼續購物</a>
+                <button type="submit" class="shoppingitem_for_right btn btn-primary">送出</button>
 
             </form>
 

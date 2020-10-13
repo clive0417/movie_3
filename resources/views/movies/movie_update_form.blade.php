@@ -19,24 +19,30 @@
     @endif
 
     <div class="form-group">
-        <label>Title</label>
+        <label class="text-white lead">電影名稱</label>
         <input name="title" class="form-control" value="{{$movie->title}}">
-        <label>TMDB ID [請至TMDB官網查詢]</label>
+        <br>
+        <label class="text-white lead">TMDB ID [請至TMDB官網查詢]</label>
         <input name="TMDB_id" class="form-control" value="{{$movie->TMDB_id}}">
-        <label>價格</label>
+        <br>
+        <label class="text-white lead">價格</label>
         <input name="price" class="form-control" value="{{$movie->price}}">
-        <label>上映日期</label>
+        <br>
+        <label class="text-white lead">上映日期</label>
         <input name="releaseDate" class="form-control" value="{{$movie->releaseDate}}">        
-        <label>Overview</label>
-        <textarea name="overview" class="form-control" rows="4" cols="50">
+        <br>
+        <label class="text-white lead">描述</label>
+        <textarea  name="overview" class="form-control" rows="4" cols="50">
         {{$movie->overview}}
         </textarea>
-        <label>語言 [多重項目請以","做分隔]</label>
+        <br>
+        <label class="text-white lead" >語言 [多重項目請以","做分隔]</label>
         <input name="languagesString" class="form-control" value="{{$languagesString}}">
-        <label>分類 [多重項目請以","做分隔]</label>
+        <br>
+        <label class="text-white lead">分類 [多重項目請以","做分隔]</label>
         <input name="genresString" class="form-control" value="{{$genresString}}">
         <br>
-        <label>電影海報</label>
+        <label class="text-white lead">電影海報</label>
         <br>
         <img src="{{$movie->posterUrl}}" alt="電影海報空缺">
 
@@ -47,6 +53,6 @@
     <div class="form-group">
 
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="button" class="btn btn-default" onclick="window.history.back()">cancel</button>
+        <button type="submit" class="btn btn-primary">送出</button>
+        <button type="button" class="btn btn-default" onclick="window.history.back()">取消</button>
 </form>

@@ -10899,20 +10899,50 @@ a.text-dark:focus {
   }
 }
 
-.dropdown {
+.right_in_homepage_cardheader {
+  right: 5px;
+}
+
+.movie_pic {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.movie_div {
   display: inline;
 }
 
-.table_row {
-  width: 20%;
-  vertical-align: middle;
-  text-align: center;
+.movie_des {
+  display: inline;
+  padding: 5px;
 }
 
-th {
-  width: 20%;
-  vertical-align: middle;
-  text-align: center;
+.movie_zone {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.home_page_filter {
+  display: inline;
+}
+
+.image-container {
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.movie_show_image {
+  float: left;
+  width: 200px;
+  height: 300px;
+  border-radius: 15px;
+}
+
+.clearn {
+  clear: both;
 }
 
 .shopping_car_img {
@@ -10935,31 +10965,25 @@ th {
   text-align: center;
 }
 
-.right_in_homepage_cardheader {
-  right: 5px;
+.order_info {
+  color: white;
 }
 
-.single_movie_card {
-  display: inline;
-  width: 100px;
+.table_row {
+  width: 20%;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
 }
 
-.movie_pic {
-  display: inline;
+th {
+  width: 20%;
+  vertical-align: middle;
+  text-align: center;
+  color: white;
 }
 
-.movie_div {
-  display: inline;
-}
-
-.movie_des {
-  display: inline;
-}
-
-.movie_zone {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+.footer_backgroud_color {
+  background-color: #404040;
 }
 

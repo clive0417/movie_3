@@ -6,12 +6,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="text-uppercase">Order Admin table</h4>
+                <h4 class="text-uppercase text-white">個人訂單總表</h4>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">Home</a>
+                    <li class="breadcrumb-item"><a href="{{ action('HomeController@index') }}">首頁</a>
                     </li>
 
-                    <li class="breadcrumb-item active">Order Admin table</li>
+                    <li class="breadcrumb-item active">個人訂單總表</li>
                 </ol>
             </div>
         </div>
@@ -29,9 +29,9 @@
             <ul class="list-group">
 
                 @foreach ($orders as $key=>$order)
-                <div class="order_id">訂單編號:{{$order->id}}</div>
-                <div class="order_id">下單時間:{{$order->created_at}}</div>
-                <table class="table_box">
+                <div class="order_info">訂單編號:{{$order->id}}</div>
+                <div class="order_info">下單時間:{{$order->created_at}}</div>
+                <table class="table_box" style="border:3px #cccccc solid;" cellpadding="10" border="1">
 
                     <thead>
                         <tr>
