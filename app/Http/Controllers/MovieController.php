@@ -289,15 +289,16 @@ class MovieController extends Controller
     {
         $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
         // 處理搜尋結果
-        $request->get('searchTMDB');
-        $searchmovie= Tmdb::getSearchApi()->searchMovies($_GET['searchTMDB']);
+        // $request->get('searchTMDB');
+        // $searchmovie= Tmdb::getSearchApi()->searchMovies($_GET['searchTMDB']);
         Log::info($_GET);
-        $searchmovieArrays=$searchmovie['results'];
+        // $searchmovieArrays=$searchmovie['results'];
         // Log::info($searchmovieArrays);
+        // return view('movies.create', ['movie' => $movie,'searchmovieArrays'=>$searchmovieArrays]);
 
 
 
-        return view('movies.create', ['movie' => $movie,'searchmovieArrays'=>$searchmovieArrays]);
+        return view('movies.create', ['movie' => $movie]);
 
         
     }
