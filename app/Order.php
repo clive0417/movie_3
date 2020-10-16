@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['user_id','address','fee'];
+    protected $fillable = ['user_id','address','fee','status'];
     public function user() // table之間的關係
     {
         

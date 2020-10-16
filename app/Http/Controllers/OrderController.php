@@ -77,17 +77,6 @@ class OrderController extends Controller
             ]);
             DB::table('shoppingitems')->where('id',$shoppingitemId)->update(['done' => 1]);
             
-
-            // Log::info(Movie::where('id',$shoppingitem[0]->movie_id)->get()[0]->id); 如果要在 Controller 從不同table 的轉換寫法
-            // $orderitem->fill($shoppingitem[0]->all());
-            // $orderitem->save();
-
-            // DB::table('orderitems')->insert(['order_id' => $lastid,]);
-            // DB::table('orderitems')->where('id', $shoppingitemId)->update(['order_id' => $lastid]);
-
-            // $XX=var_dump($shoppingitem['user_id']);
-            // Log::info($XX);
-
             
         }
 
@@ -102,6 +91,18 @@ class OrderController extends Controller
 
         return redirect('/');
 
+    }
+    public function update(Request $request, Order $order)
+    {
+        // 電影table 填入資料
+        Log::info($request);
+         $order->fill($request->all());
+         $order->save();
+
+
+
+
+        return redirect('/orders');
     }
 
 
