@@ -22,7 +22,7 @@
         <label class="text-white lead">電影名稱</label>
         <input name="title" class="form-control" value="{{$movie->title}}">
         <br>
-        <label class="text-white lead">TMDB ID [請至TMDB官網查詢]</label>
+        <label class="text-white lead">TMDB ID [請至TMDB官網查詢 或使用下面的TMDBID搜尋]</label>
         <input name="TMDB_id" class="form-control" value="{{$movie->TMDB_id}}">
         <br>
         <label class="text-white lead">價格</label>

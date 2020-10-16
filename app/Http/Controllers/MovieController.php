@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Tmdb\Laravel\Facades\Tmdb; // optional for Laravel ≥5.5
 use Illuminate\Support\Facades\Log;
+use Tmdb\Repository\SearchRepository;
 
 class MovieController extends Controller
 {
@@ -57,8 +58,9 @@ class MovieController extends Controller
         $movie->fill($request->all());
 
 
+        
         $movieCreditrApiInfo = Tmdb::getMoviesApi()->getCredits($movie['TMDB_id']);
-        Log::info($movieCreditrApiInfo);
+        // Log::info($movieCreditrApiInfo);
         $movieApiInfo = Tmdb::getMoviesApi()->getMovie($movie['TMDB_id'], array('language' => 'zh'));
         $movie['posterUrl'] = "https://image.tmdb.org/t/p/w500/" . $movieApiInfo['poster_path'];
         $movie['releaseDate'] = $movieApiInfo['release_date'];
@@ -71,7 +73,7 @@ class MovieController extends Controller
         $movie->save();
         //處理video 匯入
         $movieViedoApiInfo = Tmdb::getMoviesApi()->getVideos($movie['TMDB_id']);
-        Log::info($movieViedoApiInfo);
+        // Log::info($movieViedoApiInfo);
         if (!empty($movieViedoApiInfo['results'])) {
             for ($i = 0; $i < count($movieViedoApiInfo['results']); $i++) {
                 $movieVideos = new Movievideo;
@@ -83,11 +85,11 @@ class MovieController extends Controller
             }
         };
 
-        Log::info($movieVideos);
+        // Log::info($movieVideos);
         //處理video 匯入 end
         // 處理actor 匯入
         $movieCreditrApiInfo = Tmdb::getMoviesApi()->getCredits($movie['TMDB_id']);
-        Log::info($movieCreditrApiInfo['cast']);
+        // Log::info($movieCreditrApiInfo['cast']);
         $actorDataArray = [];
         //組array
         if (count($movieCreditrApiInfo['cast']) > 4) {
@@ -280,5 +282,21 @@ class MovieController extends Controller
     public function destroy(Movie $movie)
     {
         $movie->delete();
+    }
+    public function searchTMDBID (Request $request,Movie $movie)
+    {
+        $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
+        $isCreate = request()->is('*create');
+        // 處理搜尋結果
+        $request->get('searchTMDB');
+        $searchmovie= Tmdb::getSearchApi()->searchMovies($request['searchTMDB']);
+        $searchmovieArrays=$searchmovie['results'];
+        Log::info($searchmovieArrays);
+
+
+
+        return view('movies.create', ['movie' => $movie, 'isCreate' => $isCreate,'searchmovieArrays'=>$searchmovieArrays]);
+
+        
     }
 }

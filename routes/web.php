@@ -50,9 +50,15 @@ Route::resource('orders','OrderController');
 
     //動詞	  路徑	             行為	     路由名稱                                  
    //GET	 /order   	          index	    order  [總表]                              //D                      
-    //GET	 /order/create 	  create   	order.create [Create 頁面]                 //D 
+    //GET	 /order/create 	     create   	order.create [Create 頁面]                 //D 
     //POST   /order              store   	order.store [存資料 / create DB 互動]
     //GET	 /order/{id}         show	    order.show [顯示單一產品頁面-->本次不需要]
     //GET	 /order/{id}/edit	  edit	    order.edit [edit 頁面]
     //PUT	 /order/{id}	      update	order.update [更新產品功能頁面]
     //DELETE /order/{id}         destroy	order.destroy [刪除]    
+Route::resource('users','UserController');
+
+    //動詞	  路徑	               行為	     路由名稱                                  
+   //GET	 /user   	          index	    user  [總表]                              //D                      
+    //PUT	 /user/{id} 	      update	user.update [更新產品功能頁面]   
+Route::get('/movies/create/searchTMDBID','MovieController@searchTMDBID'); 
