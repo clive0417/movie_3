@@ -283,19 +283,20 @@ class MovieController extends Controller
     {
         $movie->delete();
     }
+
+
     public function searchTMDBID (Request $request,Movie $movie)
     {
         $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
-        $isCreate = request()->is('*create');
         // 處理搜尋結果
         $request->get('searchTMDB');
-        $searchmovie= Tmdb::getSearchApi()->searchMovies($request['searchTMDB']);
+        $searchmovie= Tmdb::getSearchApi()->searchMovies($_GET['searchTMDB']);
         $searchmovieArrays=$searchmovie['results'];
-        Log::info($searchmovieArrays);
+        // Log::info($searchmovieArrays);
 
 
 
-        return view('movies.create', ['movie' => $movie, 'isCreate' => $isCreate,'searchmovieArrays'=>$searchmovieArrays]);
+        return view('movies.create', ['movie' => $movie,'searchmovieArrays'=>$searchmovieArrays]);
 
         
     }
