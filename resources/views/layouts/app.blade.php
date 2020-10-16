@@ -88,7 +88,7 @@
                         </div>
                     </li>
                     {{-- li 為商品管理 --}}
-                    @if(Auth::user()->id ===1 )
+                    @if(Auth::user()->management ===2 || Auth::user()->management ===3 )
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle　movie" href="#" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" v-pre>
@@ -115,6 +115,9 @@
 
 
                     </li>
+                    @endif
+                    @if(Auth::user()->management ===3 )
+                    
                     @endif
                     @endguest
 

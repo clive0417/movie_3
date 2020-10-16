@@ -9,10 +9,12 @@
     <br>
     <br>
     <div class="alert alert-info " role="alert">
-        測試帳號[管理者] shou@shou.com<br>
-        測試密碼[管理者] shoushoushou<br>
-        測試帳號[管理者] a@a<br>
-        測試密碼[管理者] aaaaaaaa<br>
+        測試帳號[root管理者] shou@shou.com<br>
+        測試密碼[root管理者] shoushoushou<br>
+        測試帳號[一般管理者] a@a<br>
+        測試密碼[一般管理者] aaaaaaaa<br>
+        測試帳號[一般會員] b@b<br>
+        測試密碼[一般會員] bbbbbbbb<br>
         或按註冊這側一個測試帳號<br>
       </div>
 
@@ -21,6 +23,7 @@
     <br>
     <div class="card-header">
         <div class="left text-white"><h4 class="left text-white" >商品列表</h4></div>
+        {{-- 移除filter function start--}}
         @if(isset($_GET['genre_id'] ))
         <button
             onclick="removegetgenre({{$_GET['genre_id']}})">種類-{{App\Genre::find($_GET['genre_id'])->name}}X</button>
@@ -38,6 +41,7 @@
         @if(isset($_GET['year'])||isset($_GET['language_id'] )||isset($_GET['genre_id'] ))
         <a href="{{ action('HomeController@index') }}" class="btn btn-primary right_in_homepage_cardheader right">取消所有篩選</a>
         @endif
+        {{-- 移除filter function end--}}
     </div>
     <br>
     <br>
@@ -79,6 +83,12 @@
             @endforeach
         </div>
     </div>
+    <Form method="get">
+        <input type="text" name="search"　placeholder="搜尋:請輸入電影名稱">
+        <button type="submit">送出</button>
+
+    </Form>
+
 
 </div>
 

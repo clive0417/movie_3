@@ -30,9 +30,8 @@ class HomeController extends Controller
         $movies = new Movie;
 
 
-        $years = DB::table('movies')->groupBy('year')->orderby('year', 'DESC')->pluck('year');
-        $genres = DB::table('genres')->orderBy('name','asc')->get();
-        $request->get('genre_id','language_id');
+
+        $request->get('genre_id','language_id','year','search');
 
         
 
@@ -52,10 +51,52 @@ class HomeController extends Controller
             $movies = $movies->where('year', $request['year']);
 
         };
+        if (isset($request['search'])) {
+            $movies = $movies->where('title', 'LIKE','%'.$request['search'].'%');
 
 
-        $languages =Language::all();
+        };
+
+
+        // $languages =Language::all();
+        $years = $movies->groupBy('year')->orderby('year', 'DESC')->pluck('year');
+        
+
         $movies = $movies->get();
+        $genres_id_array= array();
+        $languages_id_array= array();
+        foreach ($movies as $key => $movie) {
+            $movieid=$movie->id;
+            //genre重整
+            $genresForArrary = Genre::whereHas('movies', function($moviequery) use($movieid) {
+                $moviequery->where('movies.id', $movieid);
+
+            });
+            $genresForArrary=$genresForArrary->get();
+            foreach ($genresForArrary as $key => $genre) {
+                if (!in_array($genre->id,$genres_id_array))
+                array_push($genres_id_array,$genre->id);
+            };
+            //language重整
+            
+            $languagesForArrary = Language::whereHas('movies', function($moviequery) use($movieid) {
+                $moviequery->where('movies.id', $movieid);
+
+            });
+            $languagesForArrary=$languagesForArrary->get();
+            //  Log::info($languages);
+            foreach ($languagesForArrary as $key => $language) {
+                if (!in_array($language->id,$languages_id_array))
+                array_push($languages_id_array,$language->id);
+            };
+        };
+        // Log::info($genres_id_array);
+        $genres = DB::table('genres')->whereIn('id', $genres_id_array)->orderBy('name','asc')->get();
+        $languages = DB::table('languages')->whereIn('id', $languages_id_array)->orderBy('name','asc')->get();
+
+
+
+
 
 
         
