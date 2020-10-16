@@ -36,20 +36,24 @@
                 <p class="text-white">{{$movie->price}}</p>
                 <label class="text-white lead" >上映日期</label>
                 <p class="text-white">{{$movie->releaseDate}}</p>
-                <br class="clearn">
-                <label class="text-white lead" >電影名稱</label>
-                <p class="text-white">{{$movie->title}}</p>
-                <label class="text-white lead" >價格</label>
-                <p class="text-white">{{$movie->price}}</p>
-                <label class="text-white lead" >上映日期</label>
-                <p class="text-white">{{$movie->releaseDate}}</p>
+                <label class="text-white lead" >演員</label>
+                @foreach ($actors as $actor)
+                <button>{{$actor->name}}</button>
+                @endforeach
+
+                <br class="clearn">      <!--poster  下面 -->
                 <label class="text-white lead" >敘述</label>
                 <p class="text-white">{{$movie->overview}}</p>
                 <label class="text-white lead" >語言</label>
                 <p class="text-white">{{$languagesString}}</p>
                 <label class="text-white lead" >分類 </label>
                 <p class="text-white">{{$genresString}}</p>
+                <label class="text-white lead" >相關影片片段 </label>
+                @foreach ($movie->movievideos as $movievideo)
+                <iframe width="560" height="315" src="{{$movievideo->viedoUrl}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <br>
+                @endforeach
+
                 <div class="form-group">
                     <form method="post" action="/shoppingitems">
                         @csrf
@@ -58,6 +62,8 @@
                         <input type="hidden" name="price" class="form-control" value="{{$movie->price}}">
                         <input type="hidden" name="title" class="form-control" value="{{$movie->title}}">
                         <input type="hidden" name="posterUrl" class="form-control" value="{{$movie->posterUrl}}">
+    
+                        
         
                         @if (Auth::check())
                         <label  class="text-white">購買數量</label>
