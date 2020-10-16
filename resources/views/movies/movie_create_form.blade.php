@@ -9,14 +9,11 @@
     </ul>
 </div>
 @endif
-<form method="post" action="{{ $actionUrl = ($isCreate)? '/movies' :'/movies/'.$movie->id}}">
+<form method="post" action="{{ $actionUrl =  '/movies' }}">
 
     <!--csrf 塞 session token 去跨過csrf -->
     @csrf
-    @if(!$isCreate)
-    <!--傳統HTML只支持，post/get 不支持put/delete laravel 要特別加 -->
-    <input type="hidden" name="_method" value="put">
-    @endif
+
 
     <div class="form-group">
         <label class="text-white lead">電影名稱</label>

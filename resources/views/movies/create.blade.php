@@ -24,7 +24,7 @@
 <div class="page-content">
     <div class="container">
         {{-- 是因為update 時要傳舊資料區分才有isCreate --}}
-        @include('movies.movie_create_form',['movie'=>$movie],['isCreate'=> $isCreate])
+        @include('movies.movie_create_form',['movie'=>$movie])
         <br>
         <form method="get" action="/movies/create/searchTMDBID">
             <label class="text-white lead">TMDBID搜尋</label>
