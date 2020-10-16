@@ -94,7 +94,7 @@ class OrderController extends Controller
     }
     public function update(Request $request, Order $order)
     {
-        // 電影table 填入資料
+
         Log::info($request);
          $order->fill($request->all());
          $order->save();

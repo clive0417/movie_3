@@ -117,6 +117,25 @@
                     </li>
                     @endif
                     @if(Auth::user()->management ===3 )
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle　movie" href="#" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" v-pre>
+                            會員權限管理<span class="caret"></span>
+                        </a>
+                        {{-- div商品管理"--}}
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ action('UserController@index') }}">
+                                會員權限管理總表
+                            </a>
+
+                        </div>
+
+
+
+
+
+
+                    </li>
                     
                     @endif
                     @endguest

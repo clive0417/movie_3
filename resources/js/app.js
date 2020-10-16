@@ -186,6 +186,41 @@ $(document).ready(function() {
     
         
     };
+    
+    changeUserRightNormal = function (id) {
+        let result = confirm('Do you want to change status of user?');
+        //console.log(result); 驗證result 帶入0,1 OK
+        
+        if (result) {
+            let actionUrl ='/users/'+id;//組合網址
+
+            
+            $.post(actionUrl,{_method:'put',management:1}).done(function() {
+                location.href = '/users';//重新整理頁面 
+    
+            });
+    
+        };
+    
+        
+    };
+    changeUserRightManager = function (id) {
+        let result = confirm('Do you want to change status of user?');
+        //console.log(result); 驗證result 帶入0,1 OK
+        
+        if (result) {
+            let actionUrl ='/users/'+id;//組合網址
+
+            
+            $.post(actionUrl,{_method:'put',management:2}).done(function() {
+                location.href = '/users';//重新整理頁面 
+    
+            });
+    
+        };
+    
+        
+    };
 
 
     
