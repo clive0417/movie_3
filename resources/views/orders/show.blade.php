@@ -53,10 +53,23 @@
                                     src={{App\Movie::withTrashed()->find($orderitem->movie_id)->posterUrl}}></td>
                             <td class="table_row">{{$orderitem->count}}</td>
                             <td class="table_row">{{$orderitem->price}}</td>
+                        
+                        </tr>
                             
 
 
                         @endforeach
+                        <td class="table_row">訂單狀態<br>
+                            @if ($order->status ===1)
+                            待完成
+                            @elseif($order->status ===2)
+                            已完成
+                            @elseif($order->status ===3)
+                            已取消
+                            @endif
+                        </td>
+
+                        
 
                         </tr>
 

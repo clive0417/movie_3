@@ -134,36 +134,63 @@ $(document).ready(function() {
 
 
     };
-
-    
+    changeOrderStatusWait = function (id) {
+        let result = confirm('Do you want to change status of order?');
 
         
-    // add shopping item list 
-        //1.add 設立監聽item 變數 in js  muti 
-        //2. set up 監聽器 [input  不行就用blur]
-        
+        if (result) {
+            let actionUrl ='/orders/'+id;//組合網址
 
-    
-    
-        //  //2. set up 監聽器 [input  不行就用blur]
-        // changes.forEach(change => {
-        //     change.addEventListener('blur', function (e){
-        //         newCount = e.target.value;
-        //         console.log("xx");
-    
-        //     });
-        // });
-    
-    
             
+            $.post(actionUrl,{_method:'put',status:1}).done(function() {
+                location.href = '/orders';//重新整理頁面 
     
+            });
     
+        };
     
+        
+    };
     
+    changeOrderStatusFinish = function (id) {
+        let result = confirm('Do you want to change status of order?');
+        //console.log(result); 驗證result 帶入0,1 OK
+        
+        if (result) {
+            let actionUrl ='/orders/'+id;//組合網址
+
+            
+            $.post(actionUrl,{_method:'put',status:2}).done(function() {
+                location.href = '/orders';//重新整理頁面 
     
+            });
     
+        };
     
+        
+    };
+    changeOrderStatusCancel = function (id) {
+        let result = confirm('Do you want to change status of order?');
+        //console.log(result); 驗證result 帶入0,1 OK
+        
+        if (result) {
+            let actionUrl ='/orders/'+id;//組合網址
+
+            
+            $.post(actionUrl,{_method:'put',status:3}).done(function() {
+                location.href = '/orders';//重新整理頁面 
     
+            });
+    
+        };
+    
+        
+    };
+
+
+    
+
+  
     
     
     const app = new Vue({

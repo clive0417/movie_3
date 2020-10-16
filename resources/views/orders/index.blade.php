@@ -40,9 +40,10 @@
                     <thead>
                         <tr>
 
-                            <th >電影名稱</th>
-                            <th >數量</th>
-                            <th >單價</th>
+                            <th>電影名稱</th>
+                            <th>數量</th>
+                            <th>單價</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -50,17 +51,37 @@
 
                         <tr class="item">
 
-                            <td class="table_row">{{App\Movie::withTrashed()->find($orderitem->movie_id)->title}}<br><img class="shopping_car_img"
+                            <td class="table_row">
+                                {{App\Movie::withTrashed()->find($orderitem->movie_id)->title}}<br><img
+                                    class="shopping_car_img"
                                     src={{App\Movie::withTrashed()->find($orderitem->movie_id)->posterUrl}}></td>
                             <td class="table_row">{{$orderitem->count}}</td>
                             <td class="table_row">{{$orderitem->price}}</td>
+
+
+
                         </tr>
-                            
+
 
 
                         @endforeach
-                        <td  class="table_row" rowspan="2"><button class="btn btn-danger"
-                            onclick="deleteOrder({{$order->id}})">Delete</button></td>
+                        <td class="table_row"><button class="btn btn-danger"
+                                onclick="deleteOrder({{$order->id}})">Delete</button></td>
+                        <td class="table_row">訂單狀態<br>
+                            @if ($order->status ===1)
+                            待完成
+                            @elseif($order->status ===2)
+                            已完成
+                            @elseif($order->status ===3)
+                            已取消
+                            @endif
+                        </td>
+                        <td class="table_row">修改訂單狀態<br>
+
+                            <button class="btn btn-secondary"onclick="changeOrderStatusWait({{$order->id}})">待完成</button>
+                            <button class="btn btn-primary"onclick="changeOrderStatusFinish({{$order->id}})">已完成</button>
+                            <button class="btn btn-danger"onclick="changeOrderStatusCancel({{$order->id}})">取消</button>
+                        </td>
                         </tr>
 
 
