@@ -291,6 +291,7 @@ class MovieController extends Controller
         // 處理搜尋結果
         $request->get('searchTMDB');
         $searchmovie= Tmdb::getSearchApi()->searchMovies($_GET['searchTMDB']);
+        Log::info($_GET);
         $searchmovieArrays=$searchmovie['results'];
         // Log::info($searchmovieArrays);
 
