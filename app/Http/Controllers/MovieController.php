@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actor;
 use App\Movie;
+use App\Movievideo;
 use App\Genre;
 use App\Language;
 use Illuminate\Support\Facades\Auth;
@@ -48,32 +50,74 @@ class MovieController extends Controller
     public function store(Request $request)
     {
 
+
+
+        //處理電影資料匯入
         $movie = new Movie;
         $movie->fill($request->all());
-        $movieApiInfo = Tmdb::getMoviesApi()->getMovie($movie['TMDB_id']);
+
+
+        $movieCreditrApiInfo = Tmdb::getMoviesApi()->getCredits($movie['TMDB_id']);
+        Log::info($movieCreditrApiInfo);
+        $movieApiInfo = Tmdb::getMoviesApi()->getMovie($movie['TMDB_id'], array('language' => 'zh'));
         $movie['posterUrl'] = "https://image.tmdb.org/t/p/w500/" . $movieApiInfo['poster_path'];
         $movie['releaseDate'] = $movieApiInfo['release_date'];
         $movie['point'] = $movieApiInfo['vote_average'];
         $movie['overview'] = $movieApiInfo['overview'];
-        $dateArray =explode( "-",  $movie['releaseDate'] );
-        $movie['year']= $dateArray[0];
+        $dateArray = explode("-",  $movie['releaseDate']);
+        $movie['year'] = $dateArray[0];
 
-        //Log::info($movieApiInfo);
+
         $movie->save();
+        //處理video 匯入
+        $movieViedoApiInfo = Tmdb::getMoviesApi()->getVideos($movie['TMDB_id']);
+        Log::info($movieViedoApiInfo);
+        if (!empty($movieViedoApiInfo['results'])) {
+            for ($i = 0; $i < count($movieViedoApiInfo['results']); $i++) {
+                $movieVideos = new Movievideo;
+                $movieVideos['viedoUrl'] = "https://www.youtube.com/embed/" . $movieViedoApiInfo['results'][$i]['key'];
+                $movieVideos['movie_id'] = $movie->id;
+                $movieVideos->save();
+                // Log::info($movieViedoApiInfo['results'][$i]['key']);
+                # code...
+            }
+        };
+
+        Log::info($movieVideos);
+        //處理video 匯入 end
+        // 處理actor 匯入
+        $movieCreditrApiInfo = Tmdb::getMoviesApi()->getCredits($movie['TMDB_id']);
+        Log::info($movieCreditrApiInfo['cast']);
+        $actorDataArray = [];
+        //組array
+        if (count($movieCreditrApiInfo['cast']) > 4) {
+            for ($i = 0; $i < 4; $i++) {
+                array_push($actorDataArray,$movieCreditrApiInfo['cast'][$i]['name']);
+            };
+        } else {
+            for ($i = 0; $i < count($movieCreditrApiInfo['cast']); $i++) {
+                array_push($actorDataArray, $movieCreditrApiInfo['cast'][$i]['name']);
+            };
+        };
+        foreach ($actorDataArray as $key => $actor) {
+            $model = Actor::firstOrCreate(['name' => $actor]);
+            $movie->actors()->attach($model->id);
+        }
+        // Log::info($actorDataArray);
+
+
 
 
         //處理genre資料填入 start
         //
         $genreDataArray = [];
-
-
         $genreApiArray = $movieApiInfo['genres'];
-        Log::info($genreApiArray);
+
         // 將API 資料轉成單純的已key 為0,1,2,.... 的Array 
         foreach ($genreApiArray as $key => $genrename) {
             array_push($genreDataArray, $genrename['name']);
         }
-        
+
 
 
         //用for each firstOrcreate [帶入圍單純數字為key的array]
@@ -83,6 +127,7 @@ class MovieController extends Controller
         }
 
         //處理genre資料填入 end
+
         //處理language 資料填入 start 
         $languageDataArray = [];
         $languageApiArray = $movieApiInfo['spoken_languages'];
@@ -113,22 +158,23 @@ class MovieController extends Controller
 
         $id = Auth::id();
         $genres = $movie->genres;
-        $languages =$movie->languages;
-        $genresString = null ;
-        
+        $languages = $movie->languages;
+        $actors = $movie->actors;
+
+
         // 將讀取出來的genres 轉換成 String
-        for ($i=0; $i <count($genres); $i++) {
+        $genresString = null;
+        for ($i = 0; $i < count($genres); $i++) {
             //Log::info($genres[$i]['name'] );
-            $genresString=$genresString.$genres[$i]['name'];
-            $genresString=$genresString. ",";
-            
+            $genresString = $genresString . $genres[$i]['name'];
+            $genresString = $genresString . ",";
         }
-        $languagesString = null ;
-        for ($i=0; $i <count($languages); $i++) {
+        // 將讀取出來的languages 轉換成 String
+        $languagesString = null;
+        for ($i = 0; $i < count($languages); $i++) {
             //Log::info($genres[$i]['name'] );
-            $languagesString = $languagesString.$languages[$i]['name'];
-            $languagesString = $languagesString. ",";
-            
+            $languagesString = $languagesString . $languages[$i]['name'];
+            $languagesString = $languagesString . ",";
         }
 
 
@@ -136,7 +182,7 @@ class MovieController extends Controller
 
 
 
-        return view('movies.show', ['movie' => $movie,'genresString' =>$genresString, 'languagesString' => $languagesString,'user_id' => $id]);
+        return view('movies.show', ['movie' => $movie, 'genresString' => $genresString, 'languagesString' => $languagesString, 'user_id' => $id,'actors'=>$actors]);
         //return view('home');
     }
 
@@ -151,14 +197,13 @@ class MovieController extends Controller
     {
 
         $genres = $movie->genres;
-        $genresString = null ;
-        
+        $genresString = null;
+
         // 將讀取出來的genres 轉換成 String
-        for ($i=0; $i <count($genres); $i++) {
+        for ($i = 0; $i < count($genres); $i++) {
             //Log::info($genres[$i]['name'] );
-            $genresString=$genresString.$genres[$i]['name'];
-            $genresString=$genresString. ",";
-            
+            $genresString = $genresString . $genres[$i]['name'];
+            $genresString = $genresString . ",";
         }
         //end
 
@@ -167,23 +212,22 @@ class MovieController extends Controller
 
 
         // 將讀取出來的languages  轉換成 String
-        $languages =$movie->languages;
-        $languagesString = null ;
-        for ($i=0; $i <count($languages); $i++) {
+        $languages = $movie->languages;
+        $languagesString = null;
+        for ($i = 0; $i < count($languages); $i++) {
             //Log::info($genres[$i]['name'] );
-            $languagesString = $languagesString.$languages[$i]['name'];
-            $languagesString = $languagesString. ",";
-            
+            $languagesString = $languagesString . $languages[$i]['name'];
+            $languagesString = $languagesString . ",";
         }
         // 將讀取出來的genresString 轉換成 以數字的array 
 
-        
+
         // end
 
 
 
         $isCreate = request()->is('*create');
-        return view('movies.edit', ['movie' => $movie, 'isCreate' => $isCreate ,'genresString' =>$genresString, 'languagesString' => $languagesString]);
+        return view('movies.edit', ['movie' => $movie, 'isCreate' => $isCreate, 'genresString' => $genresString, 'languagesString' => $languagesString]);
     }
 
     /**
@@ -198,32 +242,33 @@ class MovieController extends Controller
         // 電影table 填入資料
         $movie->fill($request->all());
         $movie->save();
+        Log::info($request);
 
         // 處理genres 重新寫入DB
         $movie->genres()->detach();
-        $genresArray = explode(',',$request['genresString']);
+        $genresArray = explode(',', $request['genresString']);
         $genresArray = array_filter($genresArray);
         //Log::info($genresArray);
-        foreach ($genresArray as $key=>$genre) {
-            $model = Genre::firstOrCreate(['name'=> $genre]);
+        foreach ($genresArray as $key => $genre) {
+            $model = Genre::firstOrCreate(['name' => $genre]);
             $movie->genres()->attach($model->id);
         }
         // 處理genres end
 
         // 處理languages 重新寫入DB
         $movie->languages()->detach();
-        $languagesArray = explode(',',$request['languagesString']);
+        $languagesArray = explode(',', $request['languagesString']);
         $languagesArray = array_filter($languagesArray);
-       // Log::info($languagesArray);
-        foreach ($languagesArray as $key=>$language) {
-            $model = Language::firstOrCreate(['name'=> $language]);
+        // Log::info($languagesArray);
+        foreach ($languagesArray as $key => $language) {
+            $model = Language::firstOrCreate(['name' => $language]);
             $movie->languages()->attach($model->id);
         }
         // 處理languages end
-        
-        
 
-        return redirect('/movies'); 
+
+
+        return redirect('/movies');
     }
 
     /**

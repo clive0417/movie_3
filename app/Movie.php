@@ -33,5 +33,15 @@ class Movie extends Model
         return $this->hasMany('App\Orderitem'); //()內為上述的檔案位置
 
     }
+    public function movievideos() // table之間的關係
+    {
+        
+        return $this->hasMany('App\Movievideo'); //()內為上述的檔案位置
+
+    }
+    public function actors()
+    {
+        return $this->belongsToMany('App\Actor');
+    }
 
 }
