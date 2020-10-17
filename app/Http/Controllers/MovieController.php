@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+session_start();
 
 use App\Actor;
 use App\Movie;
@@ -32,14 +33,40 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
 
         $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
+        // Log::info($request);
+        if(isset($request['search'])){
+            $_SESSION['search'] = $request['search'];
+            Log::info($_SESSION['search']);
+
+        }
+
+        Log::info("尚未進判斷");
+        if(isset( $_SESSION['search'])){
+            $searchmovie= Tmdb::getSearchApi()->searchMovies($_SESSION['search']);
+            // Log::info("2.".$searchname);
+            $searchmovieArrays=$searchmovie['results'];
+            // Log::info($searchmovie);
+            Log::info("判斷有資料");
+            // Log::info($searchmovieArrays);
+
+        }else{
+            if(!isset( $searchmovieArrays)){
+                $searchmovieArrays=[];
+                Log::info("判斷無資料");
+
+            }
+
+
+        }
 
 
 
-        return view('movies.create', ['movie' => $movie]);
+
+        return view('movies.create', ['movie' => $movie,'searchmovieArrays'=>$searchmovieArrays]);
     }
 
     /**
@@ -285,21 +312,5 @@ class MovieController extends Controller
     }
 
 
-    public function searchTMDBID (Request $request,Movie $movie)
-    {
-        $movie = new Movie; //$movie 變數等於 空白的movie model 做為等下填入資料使用
-        // 處理搜尋結果
-        $request->get('searchTMDB');
-        $searchmovie= Tmdb::getSearchApi()->searchMovies($_GET['searchTMDB']);
-        Log::info($_GET);
-        $searchmovieArrays=$searchmovie['results'];
-        // Log::info($searchmovieArrays);
-        return view('movies.create', ['movie' => $movie,'searchmovieArrays'=>$searchmovieArrays]);
 
-
-
-        // return view('movies.create', ['movie' => $movie]);
-
-        
-    }
 }

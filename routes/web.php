@@ -62,3 +62,4 @@ Route::resource('users','UserController');
    //GET	 /user   	          index	    user  [總表]                              //D                      
     //PUT	 /user/{id} 	      update	user.update [更新產品功能頁面]   
 Route::get('/searchTMDBID','MovieController@searchTMDBID'); 
+Route::get('/search/{searchname}','MovieController@searchTMDBID2'); 

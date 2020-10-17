@@ -49738,7 +49738,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component("example-component", __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49748,72 +49748,66 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 $(document).ready(function () {
   $.ajaxSetup({
     headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
     }
   });
 
   deleteMovie = function deleteMovie(id) {
-    var result = confirm('Do you want to delete movie?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to delete movie?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/movies/' + id; //組合網址
+      var actionUrl = "/movies/" + id; //組合網址
       //console.log(actionurl);位置驗證OK
       //console.log(actionUrl);
 
       $.post(actionUrl, {
-        _method: 'delete'
+        _method: "delete"
       }).done(function () {
-        console.log('test');
-        location.href = '/movies'; //重新整理頁面 
+        console.log("test");
+        location.href = "/movies"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   deleteShoppingitem = function deleteShoppingitem(id) {
-    var result = confirm('Do you want to delete this item?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to delete this item?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/shoppingitems/' + id; //組合網址
+      var actionUrl = "/shoppingitems/" + id; //組合網址
       //console.log(actionurl);位置驗證OK
       //console.log(actionUrl);
 
       $.post(actionUrl, {
-        _method: 'delete'
+        _method: "delete"
       }).done(function () {
-        location.href = '/shoppingitems'; //重新整理頁面 
+        location.href = "/shoppingitems"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   deleteOrder = function deleteOrder(id) {
-    var result = confirm('Do you want to delete Order?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to delete Order?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/orders/' + id; //組合網址
+      var actionUrl = "/orders/" + id; //組合網址
       //console.log(actionurl);位置驗證OK
       //console.log(actionUrl);
 
       $.post(actionUrl, {
-        _method: 'delete'
+        _method: "delete"
       }).done(function () {
-        location.href = '/orders'; //重新整理頁面 
+        location.href = "/orders"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   changecount = function changecount(id, value) {
     $.post("/shoppingitems/" + id, {
-      _method: 'put',
+      _method: "put",
       shoppingitem_id: id,
       count: value
     }).done(function () {
-      location.href = '/shoppingitems'; //重新整理頁面 
+      location.href = "/shoppingitems"; //重新整理頁面
     });
   };
 
@@ -49840,92 +49834,95 @@ $(document).ready(function () {
   };
 
   changeOrderStatusWait = function changeOrderStatusWait(id) {
-    var result = confirm('Do you want to change status of order?');
+    var result = confirm("Do you want to change status of order?");
 
     if (result) {
-      var actionUrl = '/orders/' + id; //組合網址
+      var actionUrl = "/orders/" + id; //組合網址
 
       $.post(actionUrl, {
-        _method: 'put',
+        _method: "put",
         status: 1
       }).done(function () {
-        location.href = '/orders'; //重新整理頁面 
+        location.href = "/orders"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   changeOrderStatusFinish = function changeOrderStatusFinish(id) {
-    var result = confirm('Do you want to change status of order?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to change status of order?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/orders/' + id; //組合網址
+      var actionUrl = "/orders/" + id; //組合網址
 
       $.post(actionUrl, {
-        _method: 'put',
+        _method: "put",
         status: 2
       }).done(function () {
-        location.href = '/orders'; //重新整理頁面 
+        location.href = "/orders"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   changeOrderStatusCancel = function changeOrderStatusCancel(id) {
-    var result = confirm('Do you want to change status of order?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to change status of order?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/orders/' + id; //組合網址
+      var actionUrl = "/orders/" + id; //組合網址
 
       $.post(actionUrl, {
-        _method: 'put',
+        _method: "put",
         status: 3
       }).done(function () {
-        location.href = '/orders'; //重新整理頁面 
+        location.href = "/orders"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   changeUserRightNormal = function changeUserRightNormal(id) {
-    var result = confirm('Do you want to change status of user?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to change status of user?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/users/' + id; //組合網址
+      var actionUrl = "/users/" + id; //組合網址
 
       $.post(actionUrl, {
-        _method: 'put',
+        _method: "put",
         management: 1
       }).done(function () {
-        location.href = '/users'; //重新整理頁面 
+        location.href = "/users"; //重新整理頁面
       });
     }
-
-    ;
   };
 
   changeUserRightManager = function changeUserRightManager(id) {
-    var result = confirm('Do you want to change status of user?'); //console.log(result); 驗證result 帶入0,1 OK
+    var result = confirm("Do you want to change status of user?"); //console.log(result); 驗證result 帶入0,1 OK
 
     if (result) {
-      var actionUrl = '/users/' + id; //組合網址
+      var actionUrl = "/users/" + id; //組合網址
 
       $.post(actionUrl, {
-        _method: 'put',
+        _method: "put",
         management: 2
       }).done(function () {
-        location.href = '/users'; //重新整理頁面 
+        location.href = "/users"; //重新整理頁面
       });
     }
+  };
 
-    ;
+  searchTMDB2 = function searchTMDB2() {
+    event.preventDefault();
+    search = document.getElementById("search").value; // console.log(search);
+
+    var actionUrl = "/movies/create"; // location.href = actionUrl;
+
+    $.get(actionUrl, {
+      search: search
+    }).done(function () {
+      location.href = actionUrl;
+    }); //  event.stopPropagation();
   };
 
   var app = new Vue({
-    el: '#app'
+    el: "#app"
   });
 });
 

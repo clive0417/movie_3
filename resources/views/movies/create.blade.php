@@ -26,15 +26,16 @@
         {{-- 是因為update 時要傳舊資料區分才有isCreate --}}
         @include('movies.movie_create_form',['movie'=>$movie])
         <br>
-        <form method="get" action="/searchTMDBID">
             <label class="text-white lead">TMDBID搜尋</label>
             <br>
-            <input type="text" name="searchTMDB" placeholder="請輸入電影名稱" >
-            <button type="submit" class="btn btn-primary">送出</button>
-        </form>
-        @if (isset($_GET['searchTMDB'] ))
+            {{-- <input type="text" id="search" name="searchTMDB" placeholder="請輸入電影名稱" > --}}
+        <input type="text" id="search" name="searchTMDB" placeholder="請輸入電影名稱" >
+        <button class="btn btn-secondary"onclick="searchTMDB2()">送出</button>
+        <br>
+
         {{-- 返回TMDB搜尋結果 --}}
         @foreach ($searchmovieArrays as $searchmovieArray)
+        
         <label class="text-white lead">電影名稱:{{$searchmovieArray['title']}}</label>
         <br>
         <label class="text-white lead" >電影TMDBID:{{$searchmovieArray['id']}}</label>
@@ -43,7 +44,7 @@
         <br>
             
         @endforeach
-        @endif
+
 
 
     </div>
