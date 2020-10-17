@@ -54,11 +54,9 @@ class MovieController extends Controller
             // Log::info($searchmovieArrays);
 
         }else{
-            if(!isset( $searchmovieArrays)){
-                $searchmovieArrays=[];
-                Log::info("判斷無資料");
-
-            }
+            
+            $searchmovieArrays=[];
+            Log::info("判斷無資料");
 
 
         }

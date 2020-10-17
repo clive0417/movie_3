@@ -186,7 +186,7 @@ $(document).ready(function() {
         let actionUrl = "/movies/create";
         // location.href = actionUrl;
         $.get( actionUrl,{search:search }).done(function() {
-            location.href = actionUrl;
+            location.href = actionUrl+?"search"=search;
 
  
 
