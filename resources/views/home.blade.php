@@ -14,8 +14,8 @@
         測試帳號[一般管理者] a@a<br>
         測試密碼[一般管理者] aaaaaaaa<br>
         測試帳號[一般會員] b@b<br>
-        測試密碼[一般會員] bbbbbbbb<br>
-        或按註冊這側一個測試帳號<br>
+        測試密碼[一般會員] bbbbbbbb<br> 
+        <a href="/register">或按註冊註冊一個測試帳號<br></a>
       </div>
 
     @endguest
